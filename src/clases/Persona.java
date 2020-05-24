@@ -144,7 +144,7 @@ public class Persona {
 
     //Metodo para validar la Dirrecion ingresada
     public void validarDireccion(String direccion) {
-
+        
     }
 
     //Se calcula el IMC del paciente y se le da el diagnostico con respecto a este segun la categoria en que se le asigno previamente
@@ -169,8 +169,7 @@ public class Persona {
     //Metodo para imprimir los datos de la Persona
     public void imprimirDatosPer() {
         System.out.println("\n----DATOS----");
-        System.out.println("Nombre: " + nombre + " \nCedula: " + cedula + " \nEdad: " + edad + " años \nSexo: " + sexo + " \nPeso: " + peso + "kg \nAltura: " + altura + "m \nDirecion: " + direccion);
-        //diagnosticoIMC();
+        System.out.println("Nombre: " + nombre + " \nCedula: " + cedula + " \nEdad: " + edad + " años \nSexo: " + sexo + " \nPeso: " + peso + "kg \nAltura: " + altura + "m \nDirecion: " + direccion);      
     }
 
     //Metodo para leer los datos de la Persona
@@ -183,6 +182,11 @@ public class Persona {
         //Verifica si la cedula es positiva
         do {
             System.out.print("\nIngrese su cedula: ");
+            while(!entrada.hasNextInt()){
+                System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
+                System.out.print("\nIngrese su cedula nuvamente: ");
+                entrada.next();
+            }
             cedula = entrada.nextInt();  
             if (cedula < 0){
                 System.out.println("ERROR : Solo se aceptan numeros positivos");
@@ -191,7 +195,12 @@ public class Persona {
 
         //Valido si la edad no es negativa ni se sobrepase de 200 años
         do {
-            System.out.print("\nIngrese su edad: ");
+            System.out.print("\nIngrese su edad: ");      
+            while(!entrada.hasNextInt()){
+                System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
+                System.out.print("\nIngrese su edad nuevamente: ");
+                entrada.next();
+            }
             edad = entrada.nextInt();
             if (edad < 1 || edad > 200) {
                 System.out.println("\nHa ingresado una edad fuera de rango, ingrese solo un edad mayor o igual a 1 año y menor de 200 años");
@@ -207,7 +216,7 @@ public class Persona {
 
         //Verificar si ingreso un sexo correcto
         do {
-            System.out.print("\nIngrese su sexo: ");
+            System.out.print("\nIngrese su sexo (M para masculino o F para femenino): ");
             sexo = entrada.next().charAt(0);
             if (comprobarSexo(sexo) == false) {
                 System.out.println("\n Ha ingresado un sexo erroneamente, recuerde solo M = masculino, F = femenino");
@@ -216,7 +225,12 @@ public class Persona {
 
         //Validar Peso entre 0kg y 500kg
         do {
-            System.out.print("\nIngrese su peso: ");
+            System.out.print("\nIngrese su peso (en Kg): ");       
+            while(!entrada.hasNextDouble()){
+                System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
+                System.out.print("\nIngrese su peso (en Kg) nuevamente: ");
+                entrada.next();
+            }
             peso = entrada.nextDouble();
             if (peso < 0 || peso > 500) {
                 System.out.println("\n Ha ingresado un peso fuera de rango, ingrese solo un peso mayor a 0,0kg y menor de 500,0kg");
@@ -225,7 +239,12 @@ public class Persona {
 
         //Validar Altura
         do {
-            System.out.print("\nIngrese su altura: ");
+            System.out.print("\nIngrese su altura (en metros): ");
+            while(!entrada.hasNextDouble()){
+                System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
+                System.out.print("\nIngrese su altura (en metros) nuevamente: ");
+                entrada.next();
+            }
             altura = entrada.nextDouble();
             if (altura < 0.0 || altura > 5.0) {
                 System.out.println("\n Ha ingresado una altura fuera de rango, ingrese solo una altura mayor a 0,0m y menor de 5,0m");

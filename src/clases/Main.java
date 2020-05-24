@@ -10,7 +10,7 @@ public class Main {
         int bandera = 0;
         int seleccion = 0;
 
-        /*    //Creacion de los objetos
+        //Creacion de los objetos
         Persona paciente1 = new Persona(26250408, "Yamil", 21, 'M', 120, 1.80, "CATIA");
         paciente1.esMayorDeEdad();
         //Impresion de datos
@@ -23,12 +23,13 @@ public class Main {
         System.out.println("\n----DATOS A INGRESAR DEL PACIENTE 2----");
         //Solicita los datos
         paciente2.leerDatosPer();
+        //Se le cambia la Direccion usando un Metodo Setter
+        paciente2.setDireccion("CARACAS");
         //Impresion de datos
         System.out.println("\n----DATOS DEL PACIENTE 2----");
         paciente2.imprimirDatosPer();
         paciente2.diagnosticoIMC();
-         */
-        //PRUEBA
+
         //Creacion de objetos de tipo Entrenador y de tipo Deportista
         
         Entrenador ent = new Entrenador();
@@ -71,23 +72,34 @@ public class Main {
                 System.out.println(" ");
                 //Recomendar si hacer o no hacer entrenamiento hoy segun su ritmo cardiaco al Deportista 
                 dep.verificarRitmoCardiacoAlto();
+                dep.diagnosticoPorcentajeGrasa(dep.calcularIMC());
                 System.out.println(" ");
-                //Determinar la rutina en base al IMC, Tipo de ejercicio y grasa corporal
-                ent.determinarRutina(dep.imcDeportista(), dep.calcularIMC(), dep.tipoEjercicio);
-                System.out.println(" ");
-                //Determinar la rutina en base a 
-                ent.determinarRutina(dep.imcDeportista());
-                System.out.println(" ");
-
+                
             } else if (seleccion == 2) {
                 
                 //Leer datos del Entrenador
+                System.out.println("\n----DATOS A INGRESAR DEL ENTRENADOR----");
                 ent.leerDatosPer();
                 System.out.println(" ");
                 //Imprimir datos del Entrenador
+                System.out.println("\n----DATOS DEL ENTRENADOR----");
                 ent.imprimirDatosPer();
                 System.out.println(" ");
-
+                //Leer datos de Deportista
+                System.out.println("\n----DATOS A INGRESAR DEL DEPORTISTA----");
+                dep.leerDatosPer();
+                //Imprimir datos de Deportista
+                System.out.println("\n----DATOS DEL DEPORTISTA----");
+                dep.imprimirDatosPer();
+                //Recomendar si hacer o no hacer entrenamiento hoy segun su ritmo cardiaco al Deportista 
+                dep.verificarRitmoCardiacoAlto();
+                //Determinar la rutina en base al IMC, Tipo de ejercicio y grasa corporal
+                ent.determinarRutina(dep.imcDeportista(), dep.calcularIMC(), dep.tipoEjercicio);
+                System.out.println(" ");
+                //Determinar la rutina en base al Tipo de Ejercicio suministrado
+                ent.determinarRutina(dep.tipoEjercicio);
+                System.out.println(" ");
+                
             } else if (seleccion == 3) {
                 
                 System.out.println(" ");

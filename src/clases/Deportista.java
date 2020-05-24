@@ -1,9 +1,11 @@
 package clases;
 
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class Deportista extends Persona{
     //Atributos propios de la clase Deportista
+    DecimalFormat df = new DecimalFormat("#.00");
     private int ritmoCardiaco;
     private String frecuenciaEntrenamiento;
     protected String tipoEjercicio;
@@ -25,6 +27,7 @@ public class Deportista extends Persona{
         frecuenciaEntrenamiento = "";
         tipoEjercicio = "";
     }
+    
     
     //Metodos
     //Validar Ritmo Cardiaco
@@ -58,9 +61,14 @@ public class Deportista extends Persona{
         //Leer correctamente el ritmo cardiaco 
         do{ 
             System.out.print("\nIngrese su ritmo cardiaco (LPM): ");
+            while(!entrada.hasNextInt()){
+                System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
+                System.out.print("\nIngrese su ritmo cardiaco (LPM) nuevamente: ");
+                entrada.next();
+            }
             ritmoCardiaco = entrada.nextInt();
             if(validarRitmoCardiaco()==false){
-                System.out.println("\nHa ingresado ritmo cardiaco fuera de rango, ingrese solo un ritmo cardiaco mayor o igual a 0 (lpm) y menor de 1000 (lpm)");
+                System.out.println("\nHa ingresado ritmo cardiaco fuera de rango, ingrese solo un ritmo cardiaco mayor o igual a 0 (LPM) y menor de 1000 (LPM)");
             }
        }while(validarRitmoCardiaco()==false);
         
@@ -93,23 +101,12 @@ public class Deportista extends Persona{
         System.out.println("Ritmo cardíaco: "+ritmoCardiaco+" (LPM)");
         System.out.println("Frecuencia de entrenamiento: "+frecuenciaEntrenamiento);
         System.out.println("Tipo de ejercicio: "+tipoEjercicio);
+        System.out.println("IMC: "+ df.format(imcDeportista()));
+        System.out.println("Porcentaje de grasa: "+df.format(calcularIMC())+"%");
+        diagnosticoPorcentajeGrasa(calcularIMC());
     }
           
-    /*
-    public int leerGenero(){
-        int genero;
-        Scanner entrada = new Scanner (System.in);
-        do{
-            System.out.println("Introduzca el numero 1 si es hombre y 0 si es mujer");
-            genero = entrada.nextInt();
-            if(genero!=1 || genero!=0){
-                System.out.println("Error! Solo se permite 1 para hombre y 0 para mujer, intentelo nuevamente");
-            }
-        }while(genero!=1 || genero!=0);
-        return genero;
-    }*/
-    
-    
+ 
     public double imcDeportista(){
         return (super.calcularIMC());
     }
@@ -117,7 +114,6 @@ public class Deportista extends Persona{
     // Sobrescribir el método calcularIMC() de la Clase Persona que ahora calcula el porcentaje de grasa
     @Override
     public double calcularIMC(){    
-        //int genero = leerGenero();
         double porcentajeGrasa;
         
         if(sexo=='M' || sexo=='m'){ //Si es masculino se multiplica *1 en la formula, si es femenino se multiplica *0
@@ -131,8 +127,7 @@ public class Deportista extends Persona{
     
     //Dar diagnostico en base al porcentaje de grasa calculado
     public void diagnosticoPorcentajeGrasa(double porcentajeGrasa){
-        System.out.println("\nDiagnotico:");
-        
+        System.out.print("\nSu diagnostico en base a su porcentaje de grasa es: ");
         if(sexo=='F' || sexo=='f'){//Diagnostico del Porcentaje de grasa para mujeres
             if(porcentajeGrasa<25){
                 System.out.println("Es una persona delgada");
@@ -156,7 +151,7 @@ public class Deportista extends Persona{
         }
     }
     
-    //Verificar ritmo cardiaco alto en reposo (>100pm)
+    //Verificar ritmo cardiaco alto en reposo (>100pm) y se le da una recomendacion si entrenar o no hoy
     public void verificarRitmoCardiacoAlto(){
         if(ritmoCardiaco>100){//Si esta alto, se le recomienda no realizar entrenamiento hoy
             System.out.println ("\n----RECOMENDACION: No realizar entrenamiento hoy----");
