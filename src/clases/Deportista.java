@@ -8,7 +8,7 @@ public class Deportista extends Persona{
     DecimalFormat df = new DecimalFormat("#.00");
     private int ritmoCardiaco;
     private String frecuenciaEntrenamiento;
-    protected String tipoEjercicio;
+    private String tipoEjercicio;
 
     
     //Constructores
@@ -27,6 +27,33 @@ public class Deportista extends Persona{
         frecuenciaEntrenamiento = "";
         tipoEjercicio = "";
     }
+
+    
+    //Getters y Setters
+    public int getRitmoCardiaco() {
+        return ritmoCardiaco;
+    }
+
+    public void setRitmoCardiaco(int ritmoCardiaco) {
+        this.ritmoCardiaco = ritmoCardiaco;
+    }
+
+    public String getFrecuenciaEntrenamiento() {
+        return frecuenciaEntrenamiento;
+    }
+
+    public void setFrecuenciaEntrenamiento(String frecuenciaEntrenamiento) {
+        this.frecuenciaEntrenamiento = frecuenciaEntrenamiento;
+    }
+
+    public String getTipoEjercicio() {
+        return tipoEjercicio;
+    }
+
+    public void setTipoEjercicio(String tipoEjercicio) {
+        this.tipoEjercicio = tipoEjercicio;
+    }
+    
     
     
     //Metodos
@@ -116,10 +143,10 @@ public class Deportista extends Persona{
     public double calcularIMC(){    
         double porcentajeGrasa;
         
-        if(sexo=='M' || sexo=='m'){ //Si es masculino se multiplica *1 en la formula, si es femenino se multiplica *0
-            porcentajeGrasa = ((1.20*super.calcularIMC()) + (0.23*edad)-(10.8*1)-5.4);
+        if(getSexo()=='M' || getSexo()=='m'){ //Si es masculino se multiplica *1 en la formula, si es femenino se multiplica *0
+            porcentajeGrasa = ((1.20*super.calcularIMC()) + (0.23*getEdad())-(10.8*1)-5.4);
         }else{
-            porcentajeGrasa = ((1.20*super.calcularIMC()) + (0.23*edad)-(10.8*0)-5.4);
+            porcentajeGrasa = ((1.20*super.calcularIMC()) + (0.23*getEdad())-(10.8*0)-5.4);
         }
    
         return porcentajeGrasa;
@@ -128,7 +155,7 @@ public class Deportista extends Persona{
     //Dar diagnostico en base al porcentaje de grasa calculado
     public void diagnosticoPorcentajeGrasa(double porcentajeGrasa){
         System.out.print("\nSu diagnostico en base a su porcentaje de grasa es: ");
-        if(sexo=='F' || sexo=='f'){//Diagnostico del Porcentaje de grasa para mujeres
+        if(getSexo()=='F' || getSexo()=='f'){//Diagnostico del Porcentaje de grasa para mujeres
             if(porcentajeGrasa<25){
                 System.out.println("Es una persona delgada");
             }

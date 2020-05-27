@@ -5,13 +5,13 @@ import java.util.Scanner;
 public class Persona {
 
     //Atributos
-    protected int cedula;
-    protected String nombre;
-    protected int edad;
-    protected char sexo;
-    protected double peso;
-    protected double altura;
-    protected String direccion;
+    private int cedula;
+    private String nombre;
+    private int edad;
+    private char sexo;
+    private double peso;
+    private double altura;
+    private String direccion;
 
     //Metodos
     //Metodos constructores

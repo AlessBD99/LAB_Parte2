@@ -94,10 +94,10 @@ public class Main {
                 //Recomendar si hacer o no hacer entrenamiento hoy segun su ritmo cardiaco al Deportista 
                 dep.verificarRitmoCardiacoAlto();
                 //Determinar la rutina en base al IMC, Tipo de ejercicio y grasa corporal
-                ent.determinarRutina(dep.imcDeportista(), dep.calcularIMC(), dep.tipoEjercicio);
+                ent.determinarRutina(dep.imcDeportista(), dep.calcularIMC(), dep.getTipoEjercicio());
                 System.out.println(" ");
                 //Determinar la rutina en base al Tipo de Ejercicio suministrado
-                ent.determinarRutina(dep.tipoEjercicio);
+                ent.determinarRutina(dep.getTipoEjercicio());
                 System.out.println(" ");
                 
             } else if (seleccion == 3) {
