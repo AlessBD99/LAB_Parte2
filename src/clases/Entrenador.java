@@ -91,7 +91,8 @@ public class Entrenador extends Persona {
     //Imprimir atributos de la clase Persona + los atributos propios de Entrenador que serian experienciaLaboral y especialidad  
     @Override
     public void imprimirDatosPer() {
-        super.imprimirDatosPer();
+        System.out.println("\n----DATOS DEL ENTRENADOR----");
+        System.out.println("Nombre: " + super.getNombre() + " \nCedula: " + super.getCedula() + " \nEdad: " + super.getEdad() + " años \nSexo: " + super.getSexo() + " \nPeso: " + super.getPeso() + "kg \nAltura: " + super.getAltura() + "m \nDirecion: " + super.getDireccion());
         System.out.println("Experiencia Laboral: " + experienciaLaboral + " años");
         System.out.println("Especialidad: " + especialidad);
     }
