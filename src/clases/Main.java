@@ -38,7 +38,7 @@ public class Main {
         //MENU DE OPCIONES 
         do {
             do {
-
+                System.out.println(" ");
                 System.out.println(" ******************** MENU DE OPCIONES *********************** ");
                 System.out.println(" 1.Deportista  ");
                 System.out.println(" 2.Entrenador  ");

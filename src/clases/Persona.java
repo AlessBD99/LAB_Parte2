@@ -1,8 +1,11 @@
 package clases;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Persona {
+
+    DecimalFormat df = new DecimalFormat("#.00");
 
     //Atributos
     private int cedula;
@@ -144,13 +147,13 @@ public class Persona {
 
     //Metodo para validar la Dirrecion ingresada
     public void validarDireccion(String direccion) {
-        
+
     }
 
     //Se calcula el IMC del paciente y se le da el diagnostico con respecto a este segun la categoria en que se le asigno previamente
     public void diagnosticoIMC() {
         System.out.println("\n----DIAGNOSTICO IMC----");
-        System.out.println("IMC: " + calcularIMC());
+        System.out.println("IMC: " + df.format(calcularIMC()));
         System.out.print("Segun su IMC usted: ");
         if (categoriaIMC(calcularIMC()) == 0) {
             System.out.println("Esta en su peso ideal");
@@ -169,7 +172,7 @@ public class Persona {
     //Metodo para imprimir los datos de la Persona
     public void imprimirDatosPer() {
         System.out.println("\n----DATOS----");
-        System.out.println("Nombre: " + nombre + " \nCedula: " + cedula + " \nEdad: " + edad + " años \nSexo: " + sexo + " \nPeso: " + peso + "kg \nAltura: " + altura + "m \nDirecion: " + direccion);      
+        System.out.println("Nombre: " + nombre + " \nCedula: " + cedula + " \nEdad: " + edad + " años \nSexo: " + sexo + " \nPeso: " + peso + "kg \nAltura: " + altura + "m \nDirecion: " + direccion);
     }
 
     //Metodo para leer los datos de la Persona
@@ -178,25 +181,25 @@ public class Persona {
 
         System.out.print("Ingrese su nombre: ");
         nombre = entrada.nextLine();
-        
+
         //Verifica si la cedula es positiva
         do {
             System.out.print("\nIngrese su cedula: ");
-            while(!entrada.hasNextInt()){
+            while (!entrada.hasNextInt()) {
                 System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
                 System.out.print("\nIngrese su cedula nuvamente: ");
                 entrada.next();
             }
-            cedula = entrada.nextInt();  
-            if (cedula < 0){
+            cedula = entrada.nextInt();
+            if (cedula < 0) {
                 System.out.println("ERROR : Solo se aceptan numeros positivos");
             }
         } while (cedula < 0);
 
         //Valido si la edad no es negativa ni se sobrepase de 200 años
         do {
-            System.out.print("\nIngrese su edad: ");      
-            while(!entrada.hasNextInt()){
+            System.out.print("\nIngrese su edad: ");
+            while (!entrada.hasNextInt()) {
                 System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
                 System.out.print("\nIngrese su edad nuevamente: ");
                 entrada.next();
@@ -225,8 +228,8 @@ public class Persona {
 
         //Validar Peso entre 0kg y 500kg
         do {
-            System.out.print("\nIngrese su peso (en Kg): ");       
-            while(!entrada.hasNextDouble()){
+            System.out.print("\nIngrese su peso (en Kg): ");
+            while (!entrada.hasNextDouble()) {
                 System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
                 System.out.print("\nIngrese su peso (en Kg) nuevamente: ");
                 entrada.next();
@@ -240,7 +243,7 @@ public class Persona {
         //Validar Altura
         do {
             System.out.print("\nIngrese su altura (en metros): ");
-            while(!entrada.hasNextDouble()){
+            while (!entrada.hasNextDouble()) {
                 System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
                 System.out.print("\nIngrese su altura (en metros) nuevamente: ");
                 entrada.next();

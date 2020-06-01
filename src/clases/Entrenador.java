@@ -599,7 +599,10 @@ public class Entrenador extends Persona {
             System.out.println(tipoEjercicio + " + Ejercicios de estiramientos");
         }
     }
-
+    
+    private void tipoRutina_1(){
     
     
+    }
+   
 }
