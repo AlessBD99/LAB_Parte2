@@ -9,27 +9,7 @@ public class Main {
         Scanner entrada = new Scanner(System.in);
         int bandera = 0;
         int seleccion = 0;
-/*
-        //Creacion de los objetos
-        Persona paciente1 = new Persona(26250408, "Yamil", 21, 'M', 120, 1.80, "CATIA");
-        paciente1.esMayorDeEdad();
-        //Impresion de datos
-        System.out.println("\n----DATOS DEL PACIENTE 1----");
-        paciente1.imprimirDatosPer();
-        paciente1.diagnosticoIMC();
 
-        //Creacion del objeto 2
-        Persona paciente2 = new Persona();
-        System.out.println("\n----DATOS A INGRESAR DEL PACIENTE 2----");
-        //Solicita los datos
-        paciente2.leerDatosPer();
-        //Se le cambia la Direccion usando un Metodo Setter
-        paciente2.setDireccion("CARACAS");
-        //Impresion de datos
-        System.out.println("\n----DATOS DEL PACIENTE 2----");
-        paciente2.imprimirDatosPer();
-        paciente2.diagnosticoIMC();
-*/
         //Creacion de objetos de tipo Entrenador, de tipo Deportista y de tipo Gimnasio
         Entrenador ent = new Entrenador();
         Deportista dep = new Deportista();
@@ -89,7 +69,6 @@ public class Main {
                     dep.leerDatosPer();
                 }
                 //Imprimir datos de Deportista
-                System.out.println("\n----DATOS DEL DEPORTISTA----");
                 dep.imprimirDatosPer();
                 //Recomendar si hacer o no hacer entrenamiento hoy segun su ritmo cardiaco al Deportista 
                 dep.verificarRitmoCardiacoAlto();
