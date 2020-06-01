@@ -3,7 +3,7 @@ package clases;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-public class Persona {
+public abstract class Persona {
 
     DecimalFormat df = new DecimalFormat("#.00");
 
@@ -170,10 +170,8 @@ public class Persona {
     }
 
     //Metodo para imprimir los datos de la Persona
-    public void imprimirDatosPer() {
-        System.out.println("\n----DATOS----");
-        System.out.println("Nombre: " + nombre + " \nCedula: " + cedula + " \nEdad: " + edad + " años \nSexo: " + sexo + " \nPeso: " + peso + "kg \nAltura: " + altura + "m \nDirecion: " + direccion);
-    }
+    public abstract void imprimirDatosPer();     
+   
 
     //Metodo para leer los datos de la Persona
     public void leerDatosPer() {
@@ -190,11 +188,11 @@ public class Persona {
                 System.out.print("\nIngrese su cedula nuvamente: ");
                 entrada.next();
             }
-            cedula = entrada.nextInt();
-            if (cedula < 0) {
-                System.out.println("ERROR : Solo se aceptan numeros positivos");
+            cedula = entrada.nextInt();  
+            if (cedula <= 0){
+                System.out.println("ERROR : Solo se aceptan cedulas mayores a cero");
             }
-        } while (cedula < 0);
+        } while (cedula <= 0);
 
         //Valido si la edad no es negativa ni se sobrepase de 200 años
         do {
