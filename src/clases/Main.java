@@ -10,9 +10,6 @@ public class Main {
         int bandera = 0;
         int seleccion = 0;
 
-        //Creacion de objetos de tipo Entrenador, de tipo Deportista y de tipo Gimnasio
-        Entrenador ent = new Entrenador();
-        Deportista dep = new Deportista();
         Gimnasio gym = new Gimnasio("Gold Gym", "Michael Jackson");
 
         //MENU DE OPCIONES 
@@ -26,7 +23,15 @@ public class Main {
                 System.out.println(" 4.Salir  ");
                 System.out.println(" ************************************************************* ");
                 System.out.print(" Seleccione una opcion : ");
+
+                while (!entrada.hasNextInt()) {
+                    System.out.println(" ");
+                    System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
+                    System.out.print("\n Seleccione una opcion : ");
+                    entrada.next();
+                }
                 seleccion = entrada.nextInt();
+
                 System.out.println(" ");
 
                 if (seleccion >= 1 && seleccion <= 4) {
@@ -44,61 +49,21 @@ public class Main {
 
             if (seleccion == 1) {
 
-                //Leer datos de Deportista
-                System.out.println("\n----DATOS A INGRESAR DEL DEPORTISTA----");
-                dep.leerDatosPer();
-                //Imprimir datos de Deportista
-                dep.imprimirDatosPer();
-                System.out.println(" ");
-                //Recomendar si hacer o no hacer entrenamiento hoy segun su ritmo cardiaco al Deportista 
-                dep.verificarRitmoCardiacoAlto();
+                gym.llenarVectorDeportista();
                 System.out.println(" ");
 
             } else if (seleccion == 2) {
 
-                //Leer datos del Entrenador
-                System.out.println("\n----DATOS A INGRESAR DEL ENTRENADOR----");
-                ent.leerDatosPer();
-                System.out.println(" ");
-                //Imprimir datos del Entrenador
-                ent.imprimirDatosPer();
-                System.out.println(" ");
-                //Leer datos de Deportista
-                if (dep.getCedula() == 0) {
-                    System.out.println("\n----DATOS A INGRESAR DEL DEPORTISTA----");
-                    dep.leerDatosPer();
-                }
-                //Imprimir datos de Deportista
-                dep.imprimirDatosPer();
-                //Recomendar si hacer o no hacer entrenamiento hoy segun su ritmo cardiaco al Deportista 
-                dep.verificarRitmoCardiacoAlto();
-                //Determinar la rutina en base al IMC, Tipo de ejercicio y grasa corporal
-                ent.determinarRutina(dep.imcDeportista(), dep.calcularIMC(), dep.getTipoEjercicio());
-                System.out.println(" ");
-                //Determinar la rutina en base al Tipo de Ejercicio suministrado
-                ent.determinarRutina(dep.getTipoEjercicio());
+                gym.llenarVectorEntrenador();
                 System.out.println(" ");
 
             } else if (seleccion == 3) {
 
-                //Se valida si ya hay un Deportista registrado antes de agregar al vector
-                if (dep.getCedula() != 0) {
-                    //Se inserta el objeto dep de la clase Deportista en el vector del Gimnasio
-                    gym.setPersona(dep);
-                }
-
-                //Se valida si ya hay un Entrenador registrado antes de agregar al vector
-                if (ent.getCedula() != 0) {
-                    //Se inserta el objeto ent de la clase Entrenador en el vector del Gimnasio
-                    gym.setPersona(ent);
-                }
-
-                //Se imprime los datos de las Personas almacenadas en el vector del Gimnasio
+//                //Se imprime los datos de las Personas almacenadas en el vector del Gimnasio
                 gym.imprimirGimnasioPersonas();
 
             } else if (seleccion == 4) {
 
-                System.out.println(" ");
                 System.out.println(" ****************************************************** ");
                 System.out.println(" ¡ Gracias ! , vuelva pronto  ");
                 System.out.println(" ****************************************************** ");

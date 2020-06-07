@@ -124,7 +124,7 @@ public class Deportista extends Persona{
     //Imprimir atributos de la clase Persona + los atributos propios de Deportista que serian Ritmo cardíaco, Frecuencia de entrenamiento, Tipo de ejercicio 
     @Override
     public void imprimirDatosPer() {
-        System.out.println("\n----DATOS DEL DEPORTISTA----");
+        
         System.out.println("Nombre: " + super.getNombre() + " \nCedula: " + super.getCedula() + " \nEdad: " + super.getEdad() + " años \nSexo: " + super.getSexo() + " \nPeso: " + super.getPeso() + "kg \nAltura: " + super.getAltura() + "m \nDirecion: " + super.getDireccion());
         System.out.println("Ritmo cardíaco: "+ritmoCardiaco+" (LPM)");
         System.out.println("Frecuencia de entrenamiento: "+frecuenciaEntrenamiento);

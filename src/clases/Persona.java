@@ -144,7 +144,7 @@ public abstract class Persona {
 
     //Metodo para validar la Dirrecion ingresada
     public void validarDireccion(String direccion) {
-        
+
     }
 
     //Se calcula el IMC del paciente y se le da el diagnostico con respecto a este segun la categoria en que se le asigno previamente
@@ -167,8 +167,7 @@ public abstract class Persona {
     }
 
     //Metodo para imprimir los datos de la Persona
-    public abstract void imprimirDatosPer();     
-   
+    public abstract void imprimirDatosPer();
 
     //Metodo para leer los datos de la Persona
     public void leerDatosPer() {
@@ -176,25 +175,25 @@ public abstract class Persona {
 
         System.out.print("Ingrese su nombre: ");
         nombre = entrada.nextLine();
-        
+
         //Verifica si la cedula es positiva
         do {
             System.out.print("\nIngrese su cedula: ");
-            while(!entrada.hasNextInt()){
+            while (!entrada.hasNextInt()) {
                 System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
                 System.out.print("\nIngrese su cedula nuvamente: ");
                 entrada.next();
             }
-            cedula = entrada.nextInt();  
-            if (cedula <= 0){
+            cedula = entrada.nextInt();
+            if (cedula <= 0) {
                 System.out.println("ERROR : Solo se aceptan cedulas mayores a cero");
             }
         } while (cedula <= 0);
 
         //Valido si la edad no es negativa ni se sobrepase de 200 años
         do {
-            System.out.print("\nIngrese su edad: ");      
-            while(!entrada.hasNextInt()){
+            System.out.print("\nIngrese su edad: ");
+            while (!entrada.hasNextInt()) {
                 System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
                 System.out.print("\nIngrese su edad nuevamente: ");
                 entrada.next();
@@ -223,8 +222,8 @@ public abstract class Persona {
 
         //Validar Peso entre 0kg y 500kg
         do {
-            System.out.print("\nIngrese su peso (en Kg): ");       
-            while(!entrada.hasNextDouble()){
+            System.out.print("\nIngrese su peso (en Kg): ");
+            while (!entrada.hasNextDouble()) {
                 System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
                 System.out.print("\nIngrese su peso (en Kg) nuevamente: ");
                 entrada.next();
@@ -238,7 +237,7 @@ public abstract class Persona {
         //Validar Altura
         do {
             System.out.print("\nIngrese su altura (en metros): ");
-            while(!entrada.hasNextDouble()){
+            while (!entrada.hasNextDouble()) {
                 System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
                 System.out.print("\nIngrese su altura (en metros) nuevamente: ");
                 entrada.next();
@@ -255,4 +254,5 @@ public abstract class Persona {
         System.out.print("\nIngrese su direccion: ");
         direccion = entrada.nextLine();
     }
+
 }
