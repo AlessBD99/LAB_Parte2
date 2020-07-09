@@ -7,12 +7,14 @@ public class Entrenador extends Persona {
 
     //Atributos propios de la clase Entrenador
     DecimalFormat df = new DecimalFormat("#.00");
+    Scanner datosEntrada = new Scanner (System.in);
     private int experienciaLaboral;
     private String especialidad;
+    private boolean comprobar;
 
     //Constructor
     //Constructor con parametros
-    public Entrenador(int cedula, String nombre, int edad, char sexo, double peso, double altura, String direccion, int experienciaLaboral, String especialidad) {
+    public Entrenador(int cedula, String nombre, int edad, String sexo, double peso, double altura, String direccion, int experienciaLaboral, String especialidad) {
         super(cedula, nombre, edad, sexo, peso, altura, direccion);
         this.experienciaLaboral = experienciaLaboral;
         this.especialidad = especialidad;
@@ -25,7 +27,6 @@ public class Entrenador extends Persona {
         especialidad = "";
     }
 
-    
     //Getters y Setters
     public int getExperienciaLaboral() {
         return experienciaLaboral;
@@ -42,9 +43,7 @@ public class Entrenador extends Persona {
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
-    
-    
-    
+
     //Metodos
     //Validar experienciaLaboral
     public boolean validarExperienciaLaboral() {
@@ -54,22 +53,21 @@ public class Entrenador extends Persona {
         return true;
     }
 
-    //Validar Experiencia Laboral
-    public void validarEspecialidad() {
-
-    }
-
     //Leer datos de la clase Persona + los atributos propios de Entrenador que serian experienciaLaboral y especialidad 
     @Override
     public void leerDatosPer() {
+        
+        System.out.println("\n------- ENTRENADOR -------");
         super.leerDatosPer();
         Scanner entrada = new Scanner(System.in);
 
         //Validacion de la experiencia laboral 
+        
         do {
+            
             System.out.print("\nIngrese su experiencia laboral (en años): ");
-            while(!entrada.hasNextInt()){
-                System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
+            while (!entrada.hasNextInt()) {
+                System.err.println("ERROR : Ese no es un numero! Ingrese solo numeros");
                 System.out.print("\nIngrese su experiencia laboral (en años) nuevamente: ");
                 entrada.next();
             }
@@ -82,16 +80,27 @@ public class Entrenador extends Persona {
         } while (validarExperienciaLaboral() == false);
 
         //Leer la especialidad
-        System.out.print("\nIngrese su especialidad: ");
         entrada.nextLine();
-        especialidad = entrada.nextLine();
+        do {
+            System.out.print("\nIngrese su especialidad: ");
+            String especialidadString = entrada.nextLine();
+            comprobar = Validación.validarEspecialidad(especialidadString);
+            
+            if (comprobar) {
+                especialidad = especialidadString;
+                
+            } else {
+                System.err.println("ERROR : Ingrese nuevamente su especialidad");
+            }
+
+        } while (comprobar == false);
 
     }
 
     //Imprimir atributos de la clase Persona + los atributos propios de Entrenador que serian experienciaLaboral y especialidad  
     @Override
     public void imprimirDatosPer() {
-        
+
         System.out.println("Nombre: " + super.getNombre() + " \nCedula: " + super.getCedula() + " \nEdad: " + super.getEdad() + " años \nSexo: " + super.getSexo() + " \nPeso: " + super.getPeso() + "kg \nAltura: " + super.getAltura() + "m \nDirecion: " + super.getDireccion());
         System.out.println("Experiencia Laboral: " + experienciaLaboral + " años");
         System.out.println("Especialidad: " + especialidad);

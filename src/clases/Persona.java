@@ -8,14 +8,18 @@ public abstract class Persona {
     private int cedula;
     private String nombre;
     private int edad;
-    private char sexo;
+    private String sexo;
     private double peso;
     private double altura;
     private String direccion;
+    private String numCadena;
+    private String patron;
+    private boolean comprobar;
+    
 
     //Metodos
     //Metodos constructores
-    public Persona(int cedula, String nombre, int edad, char sexo, double peso, double altura, String direccion) {
+    public Persona(int cedula, String nombre, int edad, String sexo, double peso, double altura, String direccion) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.edad = edad;
@@ -29,7 +33,7 @@ public abstract class Persona {
         cedula = 0;
         nombre = "";
         edad = 0;
-        sexo = ' ';
+        sexo = " ";
         peso = 0;
         altura = 0;
         direccion = "";
@@ -60,11 +64,11 @@ public abstract class Persona {
         this.edad = edad;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -121,32 +125,6 @@ public abstract class Persona {
         return valorADevolver;
     }
 
-    //Metodo para mostrar si es mayor o menor de edad
-    public boolean esMayorDeEdad() {
-        boolean mayorEdad;
-
-        if (edad < 18) {
-            mayorEdad = false;
-        } else {
-            mayorEdad = true;
-        }
-        return mayorEdad;
-    }
-
-    //Metodo para validar el Sexo ingresado
-    public boolean comprobarSexo(char sexo) {
-        if (sexo == 'F' || sexo == 'f' || sexo == 'M' || sexo == 'm') {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    //Metodo para validar la Dirrecion ingresada
-    public void validarDireccion(String direccion) {
-
-    }
-
     //Se calcula el IMC del paciente y se le da el diagnostico con respecto a este segun la categoria en que se le asigno previamente
     public void diagnosticoIMC() {
         System.out.println("\n----DIAGNOSTICO IMC----");
@@ -172,87 +150,114 @@ public abstract class Persona {
     //Metodo para leer los datos de la Persona
     public void leerDatosPer() {
         Scanner entrada = new Scanner(System.in);
-
-        System.out.print("Ingrese su nombre: ");
-        nombre = entrada.nextLine();
-
-        //Verifica si la cedula es positiva
+        
+        //Verifica el nombre
         do {
-            System.out.print("\nIngrese su cedula: ");
-            while (!entrada.hasNextInt()) {
-                System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
-                System.out.print("\nIngrese su cedula nuvamente: ");
-                entrada.next();
-            }
-            cedula = entrada.nextInt();
-            if (cedula <= 0) {
-                System.out.println("ERROR : Solo se aceptan cedulas mayores a cero");
-            }
-        } while (cedula <= 0);
 
-        //Valido si la edad no es negativa ni se sobrepase de 200 años
+            System.out.print("Ingrese su nombre: ");
+            String nombreString = entrada.nextLine();
+             comprobar = Validación.validarNombre(nombreString); //Verifica si la cedula es positiva
+            
+            if (comprobar) {
+                nombre = nombreString;
+            } else {
+                System.err.println("ERROR : Ingresar nuevamente su nombre");
+            }
+        } while (comprobar == false);
+
+        //Verifica la cedula
+        do {
+
+            System.out.print("\nIngrese su cedula: ");
+            numCadena = entrada.nextLine();
+            comprobar = Validación.validarEnteroPositivo(numCadena);
+            
+            if (comprobar == false) {
+                System.err.println("ERROR : Ingrese nuevamente la cedula ");
+            } else {
+                cedula = Integer.parseInt(numCadena);
+            }
+        } while (cedula == 0);
+
+        //Valid si la edad no es negativa ni se sobrepase de 100 años
         do {
             System.out.print("\nIngrese su edad: ");
-            while (!entrada.hasNextInt()) {
-                System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
-                System.out.print("\nIngrese su edad nuevamente: ");
-                entrada.next();
+            numCadena = entrada.nextLine();
+            comprobar = Validación.validarEntradaEdad(numCadena);
+            
+            if (comprobar == false) {
+                System.err.println("ERROR : Ingrese nuevamente su edad ");
+            } else {
+                edad = Integer.parseInt(numCadena);
+                if (edad < 18 || edad > 100) {
+                    System.err.println("ERROR : Debe tener entre 18 y 100 años ");
+                }
             }
-            edad = entrada.nextInt();
-            if (edad < 1 || edad > 200) {
-                System.out.println("\nHa ingresado una edad fuera de rango, ingrese solo un edad mayor o igual a 1 año y menor de 200 años");
-            }
-        } while (edad < 1 || edad > 200);
-
-        //Imprime si es mayor o menor de edad
-        if (esMayorDeEdad() == true) {
-            System.out.println("\nEs mayor de edad");
-        } else {
-            System.out.println("\nEs menor de edad");
-        }
+        } while (edad < 18 || edad > 100);
 
         //Verificar si ingreso un sexo correcto
+        char sex ;
         do {
-            System.out.print("\nIngrese su sexo (M para masculino o F para femenino): ");
-            sexo = entrada.next().charAt(0);
-            if (comprobarSexo(sexo) == false) {
-                System.out.println("\n Ha ingresado un sexo erroneamente, recuerde solo M = masculino, F = femenino");
+            System.out.print("\nIngrese su sexo (masculino o femenino): ");
+            sexo = entrada.nextLine();
+            numCadena = sexo.toLowerCase();
+            comprobar = Validación.validarSexo(numCadena);
+            
+            if (comprobar == false) {
+                System.err.println("ERROR: Ha ingresado un sexo erroneo , recuerde masculino,femenino");
             }
-        } while (comprobarSexo(sexo) == false);
+        } while (comprobar == false);
 
-        //Validar Peso entre 0kg y 500kg
+        //Validar Peso entre 45kg y 500kg
         do {
-            System.out.print("\nIngrese su peso (en Kg): ");
-            while (!entrada.hasNextDouble()) {
-                System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
-                System.out.print("\nIngrese su peso (en Kg) nuevamente: ");
-                entrada.next();
-            }
-            peso = entrada.nextDouble();
-            if (peso < 0 || peso > 500) {
-                System.out.println("\n Ha ingresado un peso fuera de rango, ingrese solo un peso mayor a 0,0kg y menor de 500,0kg");
-            }
-        } while (peso < 0 || peso > 500);
+            
+            System.out.print("\nIngrese su peso [min:45 Kg - max:500 Kg] : ");
+            numCadena = entrada.nextLine();
+            comprobar = Validación.validarDoublePositivo(numCadena);
 
+            if (comprobar == false) {
+                System.err.println("ERROR: Ingrese nuevamente su peso");
+            } else {
+                peso = Double.parseDouble(numCadena);
+                if (peso < 45 || peso > 500) {
+                    System.err.println("ERROR : Debe estar entre 45 Kg y 500 Kg ");
+                }
+            }
+        } while (peso < 45 || peso > 500);
+
+        
         //Validar Altura
         do {
-            System.out.print("\nIngrese su altura (en metros): ");
-            while (!entrada.hasNextDouble()) {
-                System.out.println("ERROR : Ese no es un numero! Ingrese solo numeros");
-                System.out.print("\nIngrese su altura (en metros) nuevamente: ");
-                entrada.next();
+            
+            System.out.print("\nIngrese su altura [min:1.45 m - max:2.7 m] : ");
+            numCadena = entrada.nextLine();
+            comprobar = Validación.validarDoublePositivo(numCadena);
+            
+            if (comprobar == false ) {
+                System.err.println("ERROR: Ingrese nuevamente su altura ");
+            } else {
+                altura = Double.parseDouble(numCadena);
+                if (altura < 1.45 || altura > 2.7) {
+                    System.err.println("ERROR : Debe estar entre 1.45 m y 2.7 m");
+                }
             }
-            altura = entrada.nextDouble();
-            if (altura < 0.0 || altura > 5.0) {
-                System.out.println("\n Ha ingresado una altura fuera de rango, ingrese solo una altura mayor a 0,0m y menor de 5,0m");
-            }
-        } while (altura < 0.0 || altura > 5.0);
+        } while (altura < 1.45 || altura > 2.7);
 
-        entrada.nextLine();
+        
 
         //Introducir direccion
-        System.out.print("\nIngrese su direccion: ");
-        direccion = entrada.nextLine();
+        
+        do {
+            System.out.print("\nIngrese su direccion: ");
+            String direccionString = entrada.nextLine();
+            comprobar= Validación.validarDireccion(direccionString);
+            
+            if (comprobar) {
+                direccion = direccionString;
+            } else {
+                System.err.println("ERROR: Ingrese nuevamente su direccion");
+            }
+        } while (comprobar == false);
     }
 
 }
