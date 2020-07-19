@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
         <file>
             <url>src/clases/Main.java</url>
             <bookmark id="1">
@@ -9,15 +9,22 @@
                 <key/>
             </bookmark>
         </file>
+        <file>
+            <url>src/vista/VentanaEntrenador.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>28</line>
+                <key/>
+            </bookmark>
+        </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Alessandro/Documents/NetBeansProjects/LAB_Parte2/src/clases/Deportista.java</file>
-            <file>file:/C:/Users/Alessandro/Documents/NetBeansProjects/LAB_Parte2/src/clases/Entrenador.java</file>
-            <file>file:/C:/Users/Alessandro/Documents/NetBeansProjects/LAB_Parte2/src/clases/Gimnasio.java</file>
-            <file>file:/C:/Users/Alessandro/Documents/NetBeansProjects/LAB_Parte2/src/clases/Main.java</file>
-            <file>file:/C:/Users/Alessandro/Documents/NetBeansProjects/LAB_Parte2/src/clases/Persona.java</file>
-            <file>file:/C:/Users/Alessandro/Documents/NetBeansProjects/LAB_Parte2/src/clases/Validación.java</file>
+            <file>file:/C:/Users/Alessandro/Documents/NetBeansProjects/LAB_Parte2/src/vista/TablaEntrenador.java</file>
+            <file>file:/C:/Users/Alessandro/Documents/NetBeansProjects/LAB_Parte2/src/vista/VentanaEntrenador.java</file>
+            <file>file:/C:/Users/Alessandro/Documents/NetBeansProjects/LAB_Parte2/src/controller/Controlador.java</file>
+            <file>file:/C:/Users/Alessandro/Documents/NetBeansProjects/LAB_Parte2/src/vista/TablaDeportista.java</file>
+            <file>file:/C:/Users/Alessandro/Documents/NetBeansProjects/LAB_Parte2/src/vista/VentanaDeportista.java</file>
         </group>
     </open-files>
 </project-private>

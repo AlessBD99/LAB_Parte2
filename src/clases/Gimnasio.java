@@ -15,7 +15,7 @@ public class Gimnasio {
     //Atributos
     private String nombreGimnasio;
     private String nombreGerente;
-    private ArrayList listaPersonas;
+    private ArrayList listaPersonas = new ArrayList<>();
     private int cantidadDePersonas;
 
     //Constructores
@@ -33,6 +33,15 @@ public class Gimnasio {
     }
 
     //Metodos
+    
+    public ArrayList getListaPersonas() {
+        return listaPersonas;
+    }
+
+    public void setListaPersonas(ArrayList listaPersonas) {
+        this.listaPersonas = listaPersonas;
+    }
+    
     public void registrarDeportista(Deportista emp) {
         listaPersonas.add(emp);
     }

@@ -56,15 +56,6 @@ public class Deportista extends Persona {
         this.tipoEjercicio = tipoEjercicio;
     }
 
-    //Metodos
-    //Validar Ritmo Cardiaco
-//    public boolean validarRitmoCardiaco() {
-//        if (ritmoCardiaco < 60 || ritmoCardiaco > 1000) {
-//            return false;
-//        }
-//        return true;
-//    }
-
     //Validar Frecuencia
     public boolean validarFrecuenciaEntrenamiento() {
         if (!(frecuenciaEntrenamiento.equalsIgnoreCase("diario")) && !(frecuenciaEntrenamiento.equalsIgnoreCase("semanal"))) {
@@ -85,7 +76,7 @@ public class Deportista extends Persona {
     @Override
     public void leerDatosPer() {
         
-        System.out.println("\n------- DEPORTISTA -------");
+//        System.out.println("\n------- DEPORTISTA -------");
         super.leerDatosPer();
         Scanner entrada = new Scanner(System.in);
         //Leer correctamente el ritmo cardiaco 
@@ -208,4 +199,7 @@ public class Deportista extends Persona {
         }
     }
 
+    
+    
+    
 }

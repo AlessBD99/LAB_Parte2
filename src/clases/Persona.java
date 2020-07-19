@@ -168,7 +168,7 @@ public abstract class Persona {
         //Verifica la cedula
         do {
 
-            System.out.print("\nIngrese su cedula: ");
+            System.out.print("\nIngrese su cedula [min:7 digitos - max:9 digitos]: ");
             numCadena = entrada.nextLine();
             comprobar = Validación.validarEnteroPositivo(numCadena);
             
@@ -176,6 +176,9 @@ public abstract class Persona {
                 System.err.println("ERROR : Ingrese nuevamente la cedula ");
             } else {
                 cedula = Integer.parseInt(numCadena);
+                if (cedula == 0){
+                System.err.println("ERROR : Ingresa nuevamente su cedula de identidad");
+                }
             }
         } while (cedula == 0);
 

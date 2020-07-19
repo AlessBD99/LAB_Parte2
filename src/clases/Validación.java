@@ -36,7 +36,7 @@ public class Validación extends Exception {
     }
 
     public static boolean validarEnteroPositivo(String patron) {
-        return patron.matches("^[1-9]+$");
+        return patron.matches("^[0-9]{7,9}$");
     }
 
     public static boolean validarDireccion(String patron) {
@@ -68,7 +68,7 @@ public class Validación extends Exception {
     }
 
     private void rango(int num) throws Validación {
-        if (num < 0) {
+        if (num <= 0) {
             throw new Validación("Números fuera de rango");
         }
 
