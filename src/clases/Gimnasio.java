@@ -43,7 +43,10 @@ public class Gimnasio {
     }
     
     public void registrarDeportista(Deportista emp) {
+        
         listaPersonas.add(emp);
+        
+       
     }
 
     public void registrarEntrenador(Entrenador emp) {

@@ -5,6 +5,7 @@
  */
 package vista;
 
+import clases.Deportista;
 import clases.Entrenador;
 import clases.Gimnasio;
 import com.placeholder.PlaceHolder;
@@ -16,9 +17,12 @@ import javax.swing.JOptionPane;
  * @author Alessandro
  */
 public class VentanaEntrenador extends javax.swing.JFrame {
+
     Controlador control;
     Gimnasio gym = new Gimnasio();
     PlaceHolder holder;
+    Entrenador ent = new Entrenador();
+
     /**
      * Creates new form VentanaEntrenador
      */
@@ -26,6 +30,7 @@ public class VentanaEntrenador extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         control = new Controlador(this);
+        btnGuardarCambios.setVisible(false);
         this.setResizable(false);
         holder = new PlaceHolder(txtCedula, " [min:7 digitos - max:9 digitos] ");
         holder = new PlaceHolder(txtEdad, " [min:18 años - max:100 años] ");
@@ -35,16 +40,37 @@ public class VentanaEntrenador extends javax.swing.JFrame {
         holder = new PlaceHolder(txtDireccion, " Ej: Av.Teheran , Montalban II , Caracas , Venezuela");
         holder = new PlaceHolder(txtEspecialidad, " Ej: Intructor de Crossfit");
     }
-     public void InicializarCamposEnte() {
-        this.txtCedula.setText(null);
-        this.txtNombre.setText(null); 
-        this.txtEdad.setText(null); 
-        this.txtPeso.setText(null);
-        this.txtAltura.setText(null); 
-        this.txtDireccion.setText(null); 
-        this.txtEspecialidad.setText(null);
-        this.txtExperiencia.setText(null);
-        
+
+    public void InicializarCamposEnte() {
+        this.txtCedula.setText("");
+        this.txtNombre.setText("");
+        this.txtEdad.setText("");
+        this.txtPeso.setText("");
+        this.txtAltura.setText("");
+        this.txtDireccion.setText("");
+        this.txtEspecialidad.setText("");
+        this.txtExperiencia.setText("");
+
+    }
+
+    public void modificacionEnte(Entrenador dep) {
+        String numDouble;
+
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        btnRegistrar.setVisible(false);
+        btnGuardarCambios.setVisible(true);
+        control = new Controlador(this);
+        this.txtAltura.setText(numDouble = Double.toString(dep.getAltura()));
+        this.txtCedula.setText(numDouble = Integer.toString(dep.getCedula()));
+        this.txtDireccion.setText(dep.getDireccion());
+        this.txtEdad.setText(numDouble = Integer.toString(dep.getEdad()));
+        this.txtEspecialidad.setText(dep.getEspecialidad());
+        this.txtExperiencia.setText(numDouble = Integer.toString(dep.getExperienciaLaboral()));
+        this.txtNombre.setText(dep.getNombre());
+        this.txtPeso.setText(numDouble = Double.toString(dep.getPeso()));
+
     }
 
     /**
@@ -79,10 +105,13 @@ public class VentanaEntrenador extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtEspecialidad = new javax.swing.JTextField();
+        btnGuardarCambios = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar entrenador");
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -114,20 +143,61 @@ public class VentanaEntrenador extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Felix Titling", 1, 12)); // NOI18N
         jLabel16.setText("Dirección");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 110, 30));
+
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 390, -1));
+
+        txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCedulaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 390, -1));
+
+        txtEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEdadKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 180, -1));
 
         comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maculino", "Femenino" }));
         jPanel1.add(comboSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 180, -1));
+
+        txtPeso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPesoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 390, -1));
+
+        txtAltura.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAlturaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtAltura, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 390, -1));
 
         txtDireccion.setColumns(20);
         txtDireccion.setRows(5);
+        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtDireccion);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 390, 60));
+
+        txtExperiencia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtExperienciaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtExperiencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 390, -1));
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 24)); // NOI18N
@@ -159,16 +229,34 @@ public class VentanaEntrenador extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Felix Titling", 1, 12)); // NOI18N
         jLabel3.setText("Experiencia laboral");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 170, -1));
+
+        txtEspecialidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEspecialidadKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 390, -1));
 
-        jLabel4.setFont(new java.awt.Font("Felix Titling", 1, 12)); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 540));
+        btnGuardarCambios.setText("Guardar Cambios");
+        btnGuardarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarCambiosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/IconoEntrenador.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 70, 70));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo4.jpeg"))); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 540));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Botón de ir hacia Atrás , va al menú principal
     private void bntAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAtrasActionPerformed
         // TODO add your handling code here:
         VentanaMenu ventana = new VentanaMenu();
@@ -178,19 +266,166 @@ public class VentanaEntrenador extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
         Entrenador ent = new Entrenador();
-        
-        if (txtNombre.getText().isEmpty() || txtCedula.getText().isEmpty() || txtAltura.getText().isEmpty() || txtDireccion.getText().isEmpty() || txtEdad.getText().isEmpty() || txtExperiencia.getText().isEmpty() || txtPeso.getText().isEmpty() || txtEspecialidad.getText().isEmpty()){
-            
+
+        if (txtNombre.getText().isEmpty() || txtCedula.getText().isEmpty() || txtAltura.getText().isEmpty() || txtDireccion.getText().isEmpty() || txtEdad.getText().isEmpty() || txtExperiencia.getText().isEmpty() || txtPeso.getText().isEmpty() || txtExperiencia.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Es obligatorio llenar todos los campos");
-            
-        }else {
-            
-            control.datosEntrenador(gym,ent,this.txtCedula,this.txtNombre,this.txtEdad,this.txtPeso,this.txtAltura,this.txtDireccion,this.txtEspecialidad,this.comboSexo,this.txtExperiencia); //capturamos los datos indicados desde la 
-            //pantalla y los asociamos al objeto persona
-            InicializarCamposEnte(); //blanqueamos botones
-            
+        } else {
+            if (txtCedula.getText().length() < 7) {
+                JOptionPane.showMessageDialog(null, "La cedula debe tener minimo 7 digitos");
+            } else {
+                if ((Integer.parseInt(txtEdad.getText()) < 18) || (Integer.parseInt(txtEdad.getText()) > 100)) {
+                    JOptionPane.showMessageDialog(null, "La edad debe ser entre 18 y 100 años");
+                } else {
+                    if ((Integer.parseInt(txtExperiencia.getText()) < 0) || (Integer.parseInt(txtExperiencia.getText()) > Integer.parseInt(txtEdad.getText()))) {
+                        JOptionPane.showMessageDialog(null, "La Experiencia laborar debe ser entre 0 y 99 años, ademas de ser menor que su edad");
+                    } else {
+                        if ((Integer.parseInt(txtPeso.getText()) < 45) || (Integer.parseInt(txtPeso.getText()) > 500)) {
+                            JOptionPane.showMessageDialog(null, "El peso debe ser entre 45 y 500 kg");
+                        } else {
+                            if ((Double.parseDouble(txtAltura.getText()) < 1.45) || (Double.parseDouble(txtAltura.getText()) > 2.70)) {
+                                JOptionPane.showMessageDialog(null, "La altura debe ser entre 1.45 y 2.70 m");
+                            } else {
+                                control.datosEntrenador(this.txtCedula, this.txtNombre, this.txtEdad, this.txtPeso, this.txtAltura, this.txtDireccion, this.txtEspecialidad, this.comboSexo, this.txtExperiencia); //capturamos los datos indicados desde la 
+                                //pantalla y los asociamos al objeto persona
+                                InicializarCamposEnte(); //blanqueamos botones
+                                JOptionPane.showMessageDialog(null, "Registrado exitosamente!!!");
+                                VentanaGimnasio ventana = new VentanaGimnasio(); //Abre la ventana del gym luego de registrar
+                                control.activaVentana(ventana, this);
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
+        // TODO add your handling code here:
+        String tipoUso = "Modificar";
+        Entrenador ent = new Entrenador();
+
+        if (txtNombre.getText().isEmpty() || txtCedula.getText().isEmpty() || txtAltura.getText().isEmpty() || txtDireccion.getText().isEmpty() || txtEdad.getText().isEmpty() || txtExperiencia.getText().isEmpty() || txtPeso.getText().isEmpty() || txtExperiencia.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Es obligatorio llenar todos los campos");
+        } else {
+            if (txtCedula.getText().length() < 7) {
+                JOptionPane.showMessageDialog(null, "La cedula debe tener minimo 7 digitos");
+            } else {
+                if ((Integer.parseInt(txtEdad.getText()) < 18) || (Integer.parseInt(txtEdad.getText()) > 100)) {
+                    JOptionPane.showMessageDialog(null, "La edad debe ser entre 18 y 100 años");
+                } else {
+                    if ((Integer.parseInt(txtExperiencia.getText()) < 0) || (Integer.parseInt(txtExperiencia.getText()) > Integer.parseInt(txtEdad.getText()))) {
+                        JOptionPane.showMessageDialog(null, "La Experiencia laborar debe ser entre 0 y 99 años, ademas de ser menor que su edad");
+                    } else {
+                        if ((Integer.parseInt(txtPeso.getText()) < 45) || (Integer.parseInt(txtPeso.getText()) > 500)) {
+                            JOptionPane.showMessageDialog(null, "El peso debe ser entre 45 y 500 kg");
+                        } else {
+                            if ((Double.parseDouble(txtAltura.getText()) < 1.45) || (Double.parseDouble(txtAltura.getText()) > 2.70)) {
+                                JOptionPane.showMessageDialog(null, "La altura debe ser entre 1.45 y 2.70 m");
+                            } else {
+                                control.datosEntrenador(this.txtCedula, this.txtNombre, this.txtEdad, this.txtPeso, this.txtAltura, this.txtDireccion, this.txtEspecialidad, this.comboSexo, this.txtExperiencia); //capturamos los datos indicados desde la 
+                                //pantalla y los asociamos al objeto persona
+                                InicializarCamposEnte(); //blanqueamos botones
+                                JOptionPane.showMessageDialog(null, "Cambios Registrados exitosamente!!!");
+                                VentanaGimnasio ventana = new VentanaGimnasio(); //Abre la ventana del gym luego de registrar
+                                control.activaVentana(ventana, this);
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+        TablaEntrenador tabla = new TablaEntrenador(gym, tipoUso);
+        control.activaVentana(tabla, this);
+    }//GEN-LAST:event_btnGuardarCambiosActionPerformed
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[a-zA-Z0-9.# ]*$"))) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtDireccionKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[a-zA-Z ]*$")) || txtNombre.getText().length() > 30) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[0-9]$")) || txtCedula.getText().length() > 7) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtCedulaKeyTyped
+
+    private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+        if (!(s1.matches("^[0-9]$")) || txtEdad.getText().length() > 2) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtEdadKeyTyped
+
+    private void txtPesoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesoKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[0-9]$")) || txtPeso.getText().length() > 2) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtPesoKeyTyped
+
+    private void txtAlturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[0-9.]$")) || txtAltura.getText().length() > 3) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtAlturaKeyTyped
+
+    private void txtExperienciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExperienciaKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[0-9.]$")) || txtExperiencia.getText().length() > 1) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtExperienciaKeyTyped
+
+    private void txtEspecialidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEspecialidadKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[a-zA-Z ]*$")) || txtEspecialidad.getText().length() > 30) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtEspecialidadKeyTyped
 
     /**
      * @param args the command line arguments
@@ -229,6 +464,7 @@ public class VentanaEntrenador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAtras;
+    private javax.swing.JButton btnGuardarCambios;
     private javax.swing.JToggleButton btnRegistrar;
     private javax.swing.JComboBox<String> comboSexo;
     private javax.swing.JLabel jLabel1;
@@ -242,6 +478,7 @@ public class VentanaEntrenador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtAltura;

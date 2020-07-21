@@ -12,6 +12,7 @@ import static controller.Controlador.gym;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +24,7 @@ public class TablaDeportista extends javax.swing.JFrame {
 
     Gimnasio gym;
     Controlador control;
+    DefaultTableModel modelo = new DefaultTableModel();
     private String cedulaDepo = "";
     private String nombreDepo = "";
     private String edadDepo = "";
@@ -38,6 +40,7 @@ public class TablaDeportista extends javax.swing.JFrame {
      * Creates new form TablaDeportista
      */
     public TablaDeportista() {
+
         initComponents();
         control = new Controlador(this);
         this.setLocationRelativeTo(null);
@@ -45,6 +48,7 @@ public class TablaDeportista extends javax.swing.JFrame {
     }
 
     public TablaDeportista(Gimnasio gym, String tipoBoton) {
+
         initComponents();
         control = new Controlador(this);
         control.llenarTablaDepo(tablaDeportista);
@@ -83,6 +87,7 @@ public class TablaDeportista extends javax.swing.JFrame {
         btnModificarDeportista = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaDeportista.setModel(new javax.swing.table.DefaultTableModel(
@@ -115,11 +120,6 @@ public class TablaDeportista extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
-            }
-        });
-        tablaDeportista.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaDeportistaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tablaDeportista);
@@ -160,31 +160,53 @@ public class TablaDeportista extends javax.swing.JFrame {
         VentanaGimnasio ventana = new VentanaGimnasio();
         control.activaVentana(ventana, this);
     }//GEN-LAST:event_btnAtrasActionPerformed
-
-    private void tablaDeportistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDeportistaMouseClicked
-        // TODO add your handling code here:
-        int i = tablaDeportista.getSelectedRow();
-        nombreDepo = (tablaDeportista.getValueAt(i, 0).toString());
-        cedulaDepo = (tablaDeportista.getValueAt(i, 1).toString());
-        edadDepo = (tablaDeportista.getValueAt(i, 2).toString());
-        sexoDepo = (tablaDeportista.getValueAt(i, 3).toString());
-        direccionDepo = (tablaDeportista.getValueAt(i, 4).toString());
-        pesoDepo = (tablaDeportista.getValueAt(i, 5).toString());
-        alturaDepo = (tablaDeportista.getValueAt(i, 6).toString());
-        ritmoCardiaco = (tablaDeportista.getValueAt(i, 7).toString());
-        frecuenciaEntrenamiento = (tablaDeportista.getValueAt(i, 8).toString());
-        tipoEjercicio = (tablaDeportista.getValueAt(i, 9).toString());
-    }//GEN-LAST:event_tablaDeportistaMouseClicked
-
+    //Botón para eliminar un deportista
     private void btnEliminarDeportistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDeportistaActionPerformed
         // TODO add your handling code here: 
-        control.eliminarElemento(this.nombreDepo);
-    }//GEN-LAST:event_btnEliminarDeportistaActionPerformed
+        int i = tablaDeportista.getSelectedRow();
+        if (i >= 0) {
+            control.eliminarElemento(this.nombreDepo);
+            nombreDepo = (tablaDeportista.getValueAt(i, 0).toString());
+            cedulaDepo = (tablaDeportista.getValueAt(i, 1).toString());
+            edadDepo = (tablaDeportista.getValueAt(i, 2).toString());
+            sexoDepo = (tablaDeportista.getValueAt(i, 3).toString());
+            direccionDepo = (tablaDeportista.getValueAt(i, 4).toString());
+            pesoDepo = (tablaDeportista.getValueAt(i, 5).toString());
+            alturaDepo = (tablaDeportista.getValueAt(i, 6).toString());
+            ritmoCardiaco = (tablaDeportista.getValueAt(i, 7).toString());
+            frecuenciaEntrenamiento = (tablaDeportista.getValueAt(i, 8).toString());
+            tipoEjercicio = (tablaDeportista.getValueAt(i, 9).toString());
+            control.eliminarElemento(this.nombreDepo);
+            control.llenarTablaDepo(tablaDeportista);
+            
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una opción para proceder");
+        }
 
+    }//GEN-LAST:event_btnEliminarDeportistaActionPerformed
+    //Botón para modificar datos de un deportista
     private void btnModificarDeportistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDeportistaActionPerformed
         // TODO add your handling code here:
-//        control.modificarCampo(this.nombreDepo);
-        
+        int i = tablaDeportista.getSelectedRow();
+        if (i >= 0) {
+            nombreDepo = (tablaDeportista.getValueAt(i, 0).toString());
+            cedulaDepo = (tablaDeportista.getValueAt(i, 1).toString());
+            edadDepo = (tablaDeportista.getValueAt(i, 2).toString());
+            sexoDepo = (tablaDeportista.getValueAt(i, 3).toString());
+            direccionDepo = (tablaDeportista.getValueAt(i, 4).toString());
+            pesoDepo = (tablaDeportista.getValueAt(i, 5).toString());
+            alturaDepo = (tablaDeportista.getValueAt(i, 6).toString());
+            ritmoCardiaco = (tablaDeportista.getValueAt(i, 7).toString());
+            frecuenciaEntrenamiento = (tablaDeportista.getValueAt(i, 8).toString());
+            tipoEjercicio = (tablaDeportista.getValueAt(i, 9).toString());
+            control.activaTabla(this);
+            control.modificarElemento(this.nombreDepo);
+           
+    
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una opción para proceder");
+        }
     }//GEN-LAST:event_btnModificarDeportistaActionPerformed
 
     /**

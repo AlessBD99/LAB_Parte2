@@ -48,9 +48,14 @@ public class VentanaGimnasio extends javax.swing.JFrame {
         btnEliminarEnt = new javax.swing.JToggleButton();
         btnModificarEnt = new javax.swing.JToggleButton();
         btnMostrarEnt = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gimnasio");
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAtras.setText("Atrás");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -58,92 +63,67 @@ public class VentanaGimnasio extends javax.swing.JFrame {
                 btnAtrasActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 318, -1, -1));
 
-        btnModificarDepo.setText("Modificar Datos");
+        btnModificarDepo.setText("Modificar Deportista");
         btnModificarDepo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarDepoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnModificarDepo, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 202, 148, -1));
 
-        btnEliminarDepo.setText("Eliminar Datos");
+        btnEliminarDepo.setText("Eliminar Deportista");
         btnEliminarDepo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarDepoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEliminarDepo, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 152, 148, -1));
 
-        btnMostrarDepo.setText("Mostrar Datos");
+        btnMostrarDepo.setText("Mostrar Deportista");
         btnMostrarDepo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMostrarDepoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnMostrarDepo, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 252, 148, -1));
 
-        btnEliminarEnt.setText("Eliminar Datos");
+        btnEliminarEnt.setText("Eliminar Entrenador");
         btnEliminarEnt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarEntActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEliminarEnt, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 152, 149, -1));
 
-        btnModificarEnt.setText("Modificar Datos");
+        btnModificarEnt.setText("Modificar Entrenador");
         btnModificarEnt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarEntActionPerformed(evt);
             }
         });
+        getContentPane().add(btnModificarEnt, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 202, -1, -1));
 
-        btnMostrarEnt.setText("Mostrar Datos");
+        btnMostrarEnt.setText("Mostrar Entrenador");
         btnMostrarEnt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMostrarEntActionPerformed(evt);
             }
         });
+        getContentPane().add(btnMostrarEnt, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 252, 149, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAtras))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEliminarDepo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                        .addComponent(btnEliminarEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnModificarDepo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnModificarEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnMostrarDepo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMostrarEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminarDepo)
-                    .addComponent(btnEliminarEnt))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModificarDepo)
-                    .addComponent(btnModificarEnt))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMostrarDepo)
-                    .addComponent(btnMostrarEnt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(btnAtras)
-                .addContainerGap())
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/deportista.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 9, 129, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/entrenador.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 6, 128, 134));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo5.jpg"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -235,5 +215,8 @@ public class VentanaGimnasio extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnModificarEnt;
     private javax.swing.JToggleButton btnMostrarDepo;
     private javax.swing.JToggleButton btnMostrarEnt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

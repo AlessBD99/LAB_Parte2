@@ -8,12 +8,16 @@ package vista;
 import clases.Deportista;
 import clases.Gimnasio;
 import com.placeholder.PlaceHolder;
+import com.sun.awt.AWTUtilities;
 import controller.Controlador;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -34,6 +38,7 @@ public class VentanaDeportista extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        btnRegistrarModificacion.setVisible(false);
         control = new Controlador(this);
         holder = new PlaceHolder(txtCedula, " [min:7 digitos - max:9 digitos] ");
         holder = new PlaceHolder(txtFrecuenciaCardiaca, " [min:60 (LPM) - max:1000 (LPM)] ");
@@ -44,14 +49,33 @@ public class VentanaDeportista extends javax.swing.JFrame {
         holder = new PlaceHolder(txtDireccion, " Ej: Av.Teheran , Montalban II , Caracas , Venezuela");
     }
 
+    public void modificacionDepo(Deportista dep) {
+        String numDouble;
+
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        btnRegistrar.setVisible(false);
+        btnRegistrarModificacion.setVisible(true);
+        control = new Controlador(this);
+        this.txtAltura.setText(numDouble = Double.toString(dep.getAltura()));
+        this.txtCedula.setText(numDouble = Integer.toString(dep.getCedula()));
+        this.txtDireccion.setText(dep.getDireccion());
+        this.txtEdad.setText(numDouble = Integer.toString(dep.getEdad()));
+        this.txtFrecuenciaCardiaca.setText(numDouble = Integer.toString(dep.getRitmoCardiaco()));
+        this.txtNombre.setText(dep.getNombre());
+        this.txtPeso.setText(numDouble = Double.toString(dep.getPeso()));
+
+    }
+
     public void InicializarCamposDepo() {
         this.txtCedula.setText(null);
-        this.txtNombre.setText(null);
-        this.txtEdad.setText(null);
-        this.txtPeso.setText(null);
-        this.txtAltura.setText(null);
-        this.txtDireccion.setText(null);
-        this.txtFrecuenciaCardiaca.setText(null);
+        this.txtNombre.setText("");
+        this.txtEdad.setText("");
+        this.txtPeso.setText("");
+        this.txtAltura.setText("");
+        this.txtDireccion.setText("");
+        this.txtFrecuenciaCardiaca.setText("");
     }
 
     /**
@@ -88,10 +112,13 @@ public class VentanaDeportista extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JToggleButton();
         btnAtras = new javax.swing.JButton();
+        btnRegistrarModificacion = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro de Datos");
+        setUndecorated(true);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -156,27 +183,61 @@ public class VentanaDeportista extends javax.swing.JFrame {
         jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 260, 30));
 
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtNombreKeyReleased(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
             }
         });
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 390, -1));
+
+        txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCedulaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 390, -1));
+
+        txtEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEdadKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 180, -1));
 
         comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
         jPanel1.add(comboSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 180, -1));
+
+        txtPeso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPesoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 390, -1));
+
+        txtAltura.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAlturaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtAltura, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 390, -1));
 
         txtDireccion.setColumns(20);
         txtDireccion.setRows(5);
+        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtDireccion);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 390, 60));
         jScrollPane1.getAccessibleContext().setAccessibleName("");
         jScrollPane1.getAccessibleContext().setAccessibleDescription("");
 
+        txtFrecuenciaCardiaca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFrecuenciaCardiacaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtFrecuenciaCardiaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 390, -1));
 
         comboFrecuenciaEntrenamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Diario", "Semanal" }));
@@ -189,7 +250,7 @@ public class VentanaDeportista extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Registro de datos del deportista ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 390, 50));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 390, 50));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -206,21 +267,27 @@ public class VentanaDeportista extends javax.swing.JFrame {
                 btnAtrasActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 520, -1, -1));
+        jPanel1.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 520, -1, -1));
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel2.setMaximumSize(new java.awt.Dimension(600, 600));
-        jLabel2.setMinimumSize(new java.awt.Dimension(600, 600));
-        jLabel2.setPreferredSize(new java.awt.Dimension(600, 600));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 680, 590));
+        btnRegistrarModificacion.setText("Guardar Cambios");
+        btnRegistrarModificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarModificacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegistrarModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/IconoDeportista.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 50, 80));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo4.jpeg"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 570));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,26 +305,157 @@ public class VentanaDeportista extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-
+       
         if (txtNombre.getText().isEmpty() || txtCedula.getText().isEmpty() || txtAltura.getText().isEmpty() || txtDireccion.getText().isEmpty() || txtEdad.getText().isEmpty() || txtFrecuenciaCardiaca.getText().isEmpty() || txtPeso.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Es obligatorio llenar todos los campos");
         } else {
-            control.datosDeportista(dep, this.txtCedula, this.txtNombre, this.txtEdad, this.txtPeso, this.txtAltura, this.txtDireccion, this.txtFrecuenciaCardiaca, this.comboSexo, this.comboTipoEjercicio, this.comboFrecuenciaEntrenamiento); //capturamos los datos indicados desde la 
-            //pantalla y los asociamos al objeto persona
-            InicializarCamposDepo(); //blanqueamos botones
-
+            if(txtCedula.getText().length()<7){
+                JOptionPane.showMessageDialog(null, "La cedula debe tener minimo 7 digitos");
+            }else{
+                if((Integer.parseInt(txtFrecuenciaCardiaca.getText())<50) || (Integer.parseInt(txtFrecuenciaCardiaca.getText())>1000)){
+                    JOptionPane.showMessageDialog(null, "La Frecuencia Cardiaca debe ser entre 50 y 1000 LPM");
+                }else{
+                    if((Integer.parseInt(txtEdad.getText())<18) || (Integer.parseInt(txtEdad.getText())>100)){
+                        JOptionPane.showMessageDialog(null, "La edad debe ser entre 18 y 100 años");
+                    }else{
+                        if((Integer.parseInt(txtPeso.getText())<45) || (Integer.parseInt(txtPeso.getText())>500)){
+                            JOptionPane.showMessageDialog(null, "El peso debe ser entre 45 y 500 kg");
+                        }else{
+                            if((Double.parseDouble(txtAltura.getText())<1.45) || (Double.parseDouble(txtAltura.getText())>2.70)){
+                                JOptionPane.showMessageDialog(null, "La altura debe ser entre 1.45 y 2.70 m");
+                            }else{
+                                control.datosDeportista(txtCedula,txtNombre,txtEdad,txtPeso,txtAltura,txtDireccion,txtFrecuenciaCardiaca,comboSexo,comboTipoEjercicio,comboFrecuenciaEntrenamiento); //capturamos los datos indicados desde la 
+                                //pantalla y los asociamos al objeto persona
+                                InicializarCamposDepo(); //blanqueamos botones
+                                JOptionPane.showMessageDialog(null, "Registrado exitosamente!!!");
+                                VentanaGimnasio ventana = new VentanaGimnasio(); //Abre la ventana del gym luego de registrar
+                                control.activaVentana(ventana, this);
+                            }
+                             
+                        }
+                                                                    
+                    }
+                    
+                }
+                
+            }
+            
         }
-
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+    private void btnRegistrarModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarModificacionActionPerformed
         // TODO add your handling code here:
-        if (control.validarNombre(txtNombre.getText())== false){
-            JOptionPane.showMessageDialog(null, "Error", "", JOptionPane.WARNING_MESSAGE);
-        }
+        String tipoUso = "Modificar";
         
-    }//GEN-LAST:event_txtNombreKeyReleased
+        if (txtNombre.getText().isEmpty() || txtCedula.getText().isEmpty() || txtAltura.getText().isEmpty() || txtDireccion.getText().isEmpty() || txtEdad.getText().isEmpty() || txtFrecuenciaCardiaca.getText().isEmpty() || txtPeso.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Es obligatorio llenar todos los campos");
+        } else {
+            if(txtCedula.getText().length()<7){
+                JOptionPane.showMessageDialog(null, "La cedula debe tener minimo 7 digitos");
+            }else{
+                if((Integer.parseInt(txtFrecuenciaCardiaca.getText())<50) || (Integer.parseInt(txtFrecuenciaCardiaca.getText())>1000)){
+                    JOptionPane.showMessageDialog(null, "La Frecuencia Cardiaca debe ser entre 50 y 1000 LPM");
+                }else{
+                    if((Integer.parseInt(txtEdad.getText())<18) || (Integer.parseInt(txtEdad.getText())>100)){
+                        JOptionPane.showMessageDialog(null, "La edad debe ser entre 18 y 100 años");
+                    }else{
+                        if((Integer.parseInt(txtPeso.getText())<45) || (Integer.parseInt(txtPeso.getText())>500)){
+                            JOptionPane.showMessageDialog(null, "El peso debe ser entre 45 y 500 kg");
+                        }else{
+                            if((Double.parseDouble(txtAltura.getText())<1.45) || (Double.parseDouble(txtAltura.getText())>2.70)){
+                                JOptionPane.showMessageDialog(null, "La altura debe ser entre 1.45 y 2.70 m");
+                            }else{
+                                control.datosDeportista(txtCedula,txtNombre,txtEdad,txtPeso,txtAltura,txtDireccion,txtFrecuenciaCardiaca,comboSexo,comboTipoEjercicio,comboFrecuenciaEntrenamiento); //capturamos los datos indicados desde la 
+                                //pantalla y los asociamos al objeto persona
+                                InicializarCamposDepo(); //blanqueamos botones
+                                JOptionPane.showMessageDialog(null, "Cambios registrados exitosamente!!!");
+                                VentanaGimnasio ventana = new VentanaGimnasio(); //Abre la ventana del gym luego de registrar
+                                control.activaVentana(ventana, this);
+                            }
+                             
+                        }
+                                                                    
+                    }
+                    
+                }
+                
+            }
+            
+        }
+
+        TablaDeportista tabla = new TablaDeportista(gym, tipoUso);
+        control.activaVentana(tabla, this);
+    }//GEN-LAST:event_btnRegistrarModificacionActionPerformed
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[a-zA-Z0-9.# ]*$"))) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtDireccionKeyTyped
+
+    private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+        if (!(s1.matches("^[0-9]$")) || txtCedula.getText().length() > 7) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtCedulaKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[a-zA-Z ]*$")) || txtNombre.getText().length() > 30) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtFrecuenciaCardiacaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFrecuenciaCardiacaKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[0-9]$")) || txtFrecuenciaCardiaca.getText().length() > 3) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtFrecuenciaCardiacaKeyTyped
+
+    private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[0-9]$")) || txtEdad.getText().length() > 2) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtEdadKeyTyped
+
+    private void txtPesoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesoKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[0-9]$")) || txtPeso.getText().length() > 2) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtPesoKeyTyped
+
+    private void txtAlturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaKeyTyped
+        // TODO add your handling code here:
+        String s1 = String.valueOf(evt.getKeyChar());
+
+        if (!(s1.matches("^[0-9.]$")) || txtAltura.getText().length() > 3) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtAlturaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -297,6 +495,7 @@ public class VentanaDeportista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private javax.swing.JToggleButton btnRegistrar;
+    private javax.swing.JButton btnRegistrarModificacion;
     private javax.swing.JComboBox<String> comboFrecuenciaEntrenamiento;
     private javax.swing.JComboBox<String> comboSexo;
     private javax.swing.JComboBox<String> comboTipoEjercicio;
@@ -311,6 +510,7 @@ public class VentanaDeportista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

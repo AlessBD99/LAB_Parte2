@@ -7,15 +7,16 @@ package vista;
 
 import clases.Gimnasio;
 import controller.Controlador;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Alessandro
  */
 public class TablaEntrenador extends javax.swing.JFrame {
-    
+
     //Variables
-    Controlador control ;
+    Controlador control;
     private String cedulaEnt = "";
     private String nombreEnt = "";
     private String edadEnt = "";
@@ -25,7 +26,7 @@ public class TablaEntrenador extends javax.swing.JFrame {
     private String direccionEnt = "";
     private String experienciaEnt = "";
     private String especialidadEnt = "";
-    
+
     /**
      * Creates new form TablaEntrenador
      */
@@ -36,6 +37,7 @@ public class TablaEntrenador extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
+
     public TablaEntrenador(Gimnasio gym, String tipoBoton) {
         initComponents();
         control = new Controlador(this);
@@ -110,14 +112,9 @@ public class TablaEntrenador extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tablaEntrenador.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaEntrenadorMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tablaEntrenador);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1040, 200));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 200));
 
         btnAtras.setText("Atrás");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -128,33 +125,76 @@ public class TablaEntrenador extends javax.swing.JFrame {
         getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 230, -1, -1));
 
         btnEliminarEnt.setText("Eliminar Entrenador");
+        btnEliminarEnt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarEntActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnEliminarEnt, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 150, -1));
 
         btnModificarEnt.setText("Modificar Entrenador");
+        btnModificarEnt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarEntActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnModificarEnt, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 150, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tablaEntrenadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEntrenadorMouseClicked
-        // TODO add your handling code here:
-        int i = tablaEntrenador.getSelectedRow();
-        nombreEnt = (tablaEntrenador.getValueAt(i, 0).toString());
-        cedulaEnt = (tablaEntrenador.getValueAt(i, 1).toString());
-        edadEnt = (tablaEntrenador.getValueAt(i, 2).toString());
-        sexoEnt = (tablaEntrenador.getValueAt(i, 3).toString());
-        direccionEnt = (tablaEntrenador.getValueAt(i, 4).toString());
-        pesoEnt = (tablaEntrenador.getValueAt(i, 5).toString());
-        alturaEnt = (tablaEntrenador.getValueAt(i, 6).toString());
-        experienciaEnt = (tablaEntrenador.getValueAt(i, 6).toString());
-        especialidadEnt = (tablaEntrenador.getValueAt(i, 6).toString());
-    }//GEN-LAST:event_tablaEntrenadorMouseClicked
-
+   
+    //Botón para ir a la ventana anterior
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
         VentanaGimnasio ventana = new VentanaGimnasio();
         control.activaVentana(ventana, this);
     }//GEN-LAST:event_btnAtrasActionPerformed
+    //Botón para eliminar un entrenador
+    private void btnEliminarEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEntActionPerformed
+        // TODO add your handling code here:
+        int i = tablaEntrenador.getSelectedRow();
+        if (i >= 0) {
+
+            nombreEnt = (tablaEntrenador.getValueAt(i, 0).toString());
+            cedulaEnt = (tablaEntrenador.getValueAt(i, 1).toString());
+            edadEnt = (tablaEntrenador.getValueAt(i, 2).toString());
+            sexoEnt = (tablaEntrenador.getValueAt(i, 3).toString());
+            direccionEnt = (tablaEntrenador.getValueAt(i, 4).toString());
+            pesoEnt = (tablaEntrenador.getValueAt(i, 5).toString());
+            alturaEnt = (tablaEntrenador.getValueAt(i, 6).toString());
+            experienciaEnt = (tablaEntrenador.getValueAt(i, 6).toString());
+            especialidadEnt = (tablaEntrenador.getValueAt(i, 6).toString());
+            control.eliminarElementoEntrenador(this.nombreEnt);
+            control.llenarTablaEnt(tablaEntrenador);
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Seleccione una opción para proceder");
+        }
+    }//GEN-LAST:event_btnEliminarEntActionPerformed
+    //Botón para modificar los datos de un entrenador
+    private void btnModificarEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEntActionPerformed
+        // TODO add your handling code here:
+        int i = tablaEntrenador.getSelectedRow();
+
+        if (i >= 0) {
+
+            nombreEnt = (tablaEntrenador.getValueAt(i, 0).toString());
+            cedulaEnt = (tablaEntrenador.getValueAt(i, 1).toString());
+            edadEnt = (tablaEntrenador.getValueAt(i, 2).toString());
+            sexoEnt = (tablaEntrenador.getValueAt(i, 3).toString());
+            direccionEnt = (tablaEntrenador.getValueAt(i, 4).toString());
+            pesoEnt = (tablaEntrenador.getValueAt(i, 5).toString());
+            alturaEnt = (tablaEntrenador.getValueAt(i, 6).toString());
+            experienciaEnt = (tablaEntrenador.getValueAt(i, 6).toString());
+            especialidadEnt = (tablaEntrenador.getValueAt(i, 6).toString());
+            control.activaTabla(this);
+            control.modificarElementoEntrenador(this.nombreEnt);
+
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Seleccione una opción para proceder");
+        }
+    }//GEN-LAST:event_btnModificarEntActionPerformed
 
     /**
      * @param args the command line arguments
