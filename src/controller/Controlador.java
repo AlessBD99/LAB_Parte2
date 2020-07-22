@@ -11,6 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
+import persistencia.PersonasXml;
 import vista.VentanaDeportista;
 import vista.VentanaEntrenador;
 
@@ -33,6 +34,8 @@ public class Controlador {
     JComboBox comboFrecuenciaEntrenamiento;
     JTextField txtEspecialidad;
     JTextField txtExperiencia;
+    PersonasXml deportista = new PersonasXml();
+    JTable tablaDeportista;
 
     public static Gimnasio gym = new Gimnasio();
 
@@ -105,7 +108,23 @@ public class Controlador {
         tablaEntrenador.setModel(dtm);
 
     }
+    
+        public void llenarTablaDepo(PersonasXml depo) {
+        int i = 0;
+        String[] columna = {"Nombre", "Cedula", "Edad", "Sexo", "Dirección", "Peso", "Altura", "Frecuencia Cardíaca", "Entrenamiento", "Ejercicio"};
+        DefaultTableModel dtm = new DefaultTableModel(null, columna);
 
+        while (gym.verTamaño() > i) {
+            if (gym.getListaPersonas().get(i).getClass().getSimpleName().equals("Deportista")) {
+                Deportista dep = (Deportista) gym.getListaPersonas().get(i);
+                String[] row = {dep.getNombre(), Integer.toString(dep.getCedula()), Integer.toString(dep.getEdad()), dep.getSexo(), dep.getDireccion(), Double.toString(dep.getPeso()), Double.toString(dep.getAltura()), Integer.toString(dep.getRitmoCardiaco()), dep.getFrecuenciaEntrenamiento(), dep.getTipoEjercicio()};
+                dtm.addRow(row);
+            }
+            i++;
+        }
+        tablaDeportista.setModel(dtm);
+
+    }
     public void eliminarElemento(String nombreDepo) {
         int i = 0;
         while (gym.verTamaño() > i) {
@@ -125,8 +144,8 @@ public class Controlador {
             if (gym.getListaPersonas().get(i).getClass().getSimpleName().equals("Deportista") && nombreDepo == dep.getNombre()) {
                 VentanaDeportista depo = new VentanaDeportista();
                 depo.modificacionDepo(dep);
-
                 gym.getListaPersonas().remove(i);
+                
 
             }
             i++;
@@ -173,6 +192,7 @@ public class Controlador {
         dep.setRitmoCardiaco(numEntero = Integer.parseInt(frecuenciaCardiacaTxt.getText()));
         dep.setFrecuenciaEntrenamiento((String) frecuenciaEntrenamientoJcombo.getSelectedItem());
         dep.setTipoEjercicio((String) tipoEjercicioJcombo.getSelectedItem());
+        deportista.actualizarDeportista(dep);
         gym.registrarDeportista(dep);
     }
 

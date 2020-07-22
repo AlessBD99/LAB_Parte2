@@ -8,6 +8,7 @@ package vista;
 import clases.Gimnasio;
 import controller.Controlador;
 import javax.swing.JOptionPane;
+import persistencia.PersonasXml;
 
 /**
  *
@@ -38,7 +39,7 @@ public class TablaEntrenador extends javax.swing.JFrame {
         this.setResizable(false);
     }
 
-    public TablaEntrenador(Gimnasio gym, String tipoBoton) {
+    public TablaEntrenador(PersonasXml ent , String tipoBoton) {
         initComponents();
         control = new Controlador(this);
         control.llenarTablaEnt(tablaEntrenador);
@@ -60,6 +61,30 @@ public class TablaEntrenador extends javax.swing.JFrame {
         }
 
     }
+    
+        public TablaEntrenador(String tipoBoton) {
+        initComponents();
+        control = new Controlador(this);
+        control.llenarTablaEnt(tablaEntrenador);
+
+        if (tipoBoton.equals("Eliminar")) {
+
+            btnEliminarEnt.setVisible(true);
+            btnModificarEnt.setVisible(false);
+
+        } else if (tipoBoton.equals("Modificar")) {
+
+            btnEliminarEnt.setVisible(false);
+            btnModificarEnt.setVisible(true);
+
+        } else if (tipoBoton.equals("")) {
+
+            btnEliminarEnt.setVisible(false);
+            btnModificarEnt.setVisible(false);
+        }
+
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import persistencia.PersonasXml;
 
 /**
  *
@@ -25,6 +26,7 @@ public class TablaDeportista extends javax.swing.JFrame {
     Gimnasio gym;
     Controlador control;
     DefaultTableModel modelo = new DefaultTableModel();
+    PersonasXml depo = new PersonasXml();
     private String cedulaDepo = "";
     private String nombreDepo = "";
     private String edadDepo = "";
@@ -47,7 +49,31 @@ public class TablaDeportista extends javax.swing.JFrame {
         this.setResizable(false);
     }
 
-    public TablaDeportista(Gimnasio gym, String tipoBoton) {
+    public TablaDeportista(PersonasXml depo ,  String tipoBoton) {
+
+        initComponents();
+        control = new Controlador(this);
+        control.llenarTablaDepo(tablaDeportista);
+
+        if (tipoBoton.equals("Eliminar")) {
+
+            btnEliminarDeportista.setVisible(true);
+            btnModificarDeportista.setVisible(false);
+
+        } else if (tipoBoton.equals("Modificar")) {
+
+            btnEliminarDeportista.setVisible(false);
+            btnModificarDeportista.setVisible(true);
+
+        } else if (tipoBoton.equals("")) {
+
+            btnEliminarDeportista.setVisible(false);
+            btnModificarDeportista.setVisible(false);
+        }
+
+    }
+    
+        public TablaDeportista(String tipoBoton) {
 
         initComponents();
         control = new Controlador(this);
@@ -176,10 +202,16 @@ public class TablaDeportista extends javax.swing.JFrame {
             ritmoCardiaco = (tablaDeportista.getValueAt(i, 7).toString());
             frecuenciaEntrenamiento = (tablaDeportista.getValueAt(i, 8).toString());
             tipoEjercicio = (tablaDeportista.getValueAt(i, 9).toString());
-            control.eliminarElemento(this.nombreDepo);
-            control.llenarTablaDepo(tablaDeportista);
             
-            
+            int confirmacion = JOptionPane.showOptionDialog(null, "¿Desea Realizar La Operación?", "::::...Confirmación...:::",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if (confirmacion == 0) {
+                
+                depo.borrarDeportista(Integer.parseInt(cedulaDepo));
+                control.eliminarElemento(this.nombreDepo);
+                control.llenarTablaDepo(tablaDeportista);
+            }
+
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione una opción para proceder");
         }
@@ -202,8 +234,9 @@ public class TablaDeportista extends javax.swing.JFrame {
             tipoEjercicio = (tablaDeportista.getValueAt(i, 9).toString());
             control.activaTabla(this);
             control.modificarElemento(this.nombreDepo);
-           
-    
+            depo.borrarDeportista(Integer.parseInt(cedulaDepo));
+  
+
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione una opción para proceder");
         }

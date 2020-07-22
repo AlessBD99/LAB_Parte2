@@ -344,7 +344,7 @@ public class VentanaEntrenador extends javax.swing.JFrame {
             }
 
         }
-        TablaEntrenador tabla = new TablaEntrenador(gym, tipoUso);
+        TablaEntrenador tabla = new TablaEntrenador(tipoUso);
         control.activaVentana(tabla, this);
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
 

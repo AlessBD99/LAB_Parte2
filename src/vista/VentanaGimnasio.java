@@ -9,6 +9,7 @@ import clases.Deportista;
 import clases.Gimnasio;
 import controller.Controlador;
 import javax.swing.JToggleButton;
+import persistencia.PersonasXml;
 
 /**
  *
@@ -16,7 +17,7 @@ import javax.swing.JToggleButton;
  */
 public class VentanaGimnasio extends javax.swing.JFrame {
     //Gimnasio gym = new Gimnasio() ;
-    Gimnasio  gym = new  Gimnasio();
+    PersonasXml  depo = new  PersonasXml();
     TablaDeportista tablaDepo;
     Deportista depoActual;
     Controlador control;
@@ -136,39 +137,39 @@ public class VentanaGimnasio extends javax.swing.JFrame {
 
     private void btnModificarDepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDepoActionPerformed
         // TODO add your handling code here:
-        TablaDeportista tabla = new TablaDeportista(gym,"Modificar");
+        TablaDeportista tabla = new TablaDeportista(depo,"Modificar");
         control.activaVentana(tabla,this); 
     }//GEN-LAST:event_btnModificarDepoActionPerformed
 
     private void btnModificarEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEntActionPerformed
         // TODO add your handling code here:
-        TablaEntrenador tabla = new TablaEntrenador(gym,"Modificar");
+        TablaEntrenador tabla = new TablaEntrenador(depo,"Modificar");
         control.activaVentana(tabla,this); 
     }//GEN-LAST:event_btnModificarEntActionPerformed
 
     private void btnMostrarDepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarDepoActionPerformed
         // TODO add your handling code here:
         
-        TablaDeportista tabla = new TablaDeportista(gym,"");
+        TablaDeportista tabla = new TablaDeportista(depo,"");
         control.activaVentana(tabla,this); 
     }//GEN-LAST:event_btnMostrarDepoActionPerformed
 
     private void btnEliminarDepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDepoActionPerformed
         // TODO add your handling code here:
-        TablaDeportista tabla = new TablaDeportista(gym,"Eliminar");
+        TablaDeportista tabla = new TablaDeportista(depo,"Eliminar");
         control.activaVentana(tabla,this); 
    
     }//GEN-LAST:event_btnEliminarDepoActionPerformed
 
     private void btnEliminarEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEntActionPerformed
         // TODO add your handling code here:
-        TablaEntrenador tabla = new TablaEntrenador(gym,"Eliminar");
+        TablaEntrenador tabla = new TablaEntrenador(depo,"Eliminar");
         control.activaVentana(tabla,this); 
     }//GEN-LAST:event_btnEliminarEntActionPerformed
 
     private void btnMostrarEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarEntActionPerformed
         // TODO add your handling code here:
-        TablaEntrenador tabla = new TablaEntrenador(gym,"");
+        TablaEntrenador tabla = new TablaEntrenador(depo,"");
         control.activaVentana(tabla,this); 
     }//GEN-LAST:event_btnMostrarEntActionPerformed
 

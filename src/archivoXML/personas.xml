@@ -1,0 +1,14 @@
+<personas>
+  <Deportista>
+    <nombreyapellido>alessandro Berardi</nombreyapellido>
+    <cedula>27200673</cedula>
+    <edad>21</edad>
+    <sexo>Masculino</sexo>
+    <direccion>Montalban</direccion>
+    <peso>100.0</peso>
+    <altura>1.89</altura>
+    <frecuenciaCardiaca>100</frecuenciaCardiaca>
+    <frecuenciaEntrenamiento>Diario</frecuenciaEntrenamiento>
+    <ejercicio>tonificacion</ejercicio>
+  </Deportista>
+</personas>

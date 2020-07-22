@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import persistencia.PersonasXml;
 
 /**
  *
@@ -28,7 +29,8 @@ public class VentanaDeportista extends javax.swing.JFrame {
     Controlador control = new Controlador(this);
     Deportista dep = new Deportista();
     Gimnasio gym = new Gimnasio();
-
+    PersonasXml datosDep = new PersonasXml();
+    private boolean resultado = false;
     PlaceHolder holder;
 
     /**
@@ -65,6 +67,7 @@ public class VentanaDeportista extends javax.swing.JFrame {
         this.txtFrecuenciaCardiaca.setText(numDouble = Integer.toString(dep.getRitmoCardiaco()));
         this.txtNombre.setText(dep.getNombre());
         this.txtPeso.setText(numDouble = Double.toString(dep.getPeso()));
+ 
 
     }
 
@@ -305,41 +308,50 @@ public class VentanaDeportista extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-       
+
         if (txtNombre.getText().isEmpty() || txtCedula.getText().isEmpty() || txtAltura.getText().isEmpty() || txtDireccion.getText().isEmpty() || txtEdad.getText().isEmpty() || txtFrecuenciaCardiaca.getText().isEmpty() || txtPeso.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Es obligatorio llenar todos los campos");
         } else {
-            if(txtCedula.getText().length()<7){
+            if (txtCedula.getText().length() < 7) {
                 JOptionPane.showMessageDialog(null, "La cedula debe tener minimo 7 digitos");
-            }else{
-                if((Integer.parseInt(txtFrecuenciaCardiaca.getText())<50) || (Integer.parseInt(txtFrecuenciaCardiaca.getText())>1000)){
+            } else {
+                if ((Integer.parseInt(txtFrecuenciaCardiaca.getText()) < 50) || (Integer.parseInt(txtFrecuenciaCardiaca.getText()) > 1000)) {
                     JOptionPane.showMessageDialog(null, "La Frecuencia Cardiaca debe ser entre 50 y 1000 LPM");
-                }else{
-                    if((Integer.parseInt(txtEdad.getText())<18) || (Integer.parseInt(txtEdad.getText())>100)){
+                } else {
+                    if ((Integer.parseInt(txtEdad.getText()) < 18) || (Integer.parseInt(txtEdad.getText()) > 100)) {
                         JOptionPane.showMessageDialog(null, "La edad debe ser entre 18 y 100 años");
-                    }else{
-                        if((Integer.parseInt(txtPeso.getText())<45) || (Integer.parseInt(txtPeso.getText())>500)){
+                    } else {
+                        if ((Integer.parseInt(txtPeso.getText()) < 45) || (Integer.parseInt(txtPeso.getText()) > 500)) {
                             JOptionPane.showMessageDialog(null, "El peso debe ser entre 45 y 500 kg");
-                        }else{
-                            if((Double.parseDouble(txtAltura.getText())<1.45) || (Double.parseDouble(txtAltura.getText())>2.70)){
+                        } else {
+                            if ((Double.parseDouble(txtAltura.getText()) < 1.45) || (Double.parseDouble(txtAltura.getText()) > 2.70)) {
                                 JOptionPane.showMessageDialog(null, "La altura debe ser entre 1.45 y 2.70 m");
-                            }else{
-                                control.datosDeportista(txtCedula,txtNombre,txtEdad,txtPeso,txtAltura,txtDireccion,txtFrecuenciaCardiaca,comboSexo,comboTipoEjercicio,comboFrecuenciaEntrenamiento); //capturamos los datos indicados desde la 
-                                //pantalla y los asociamos al objeto persona
-                                InicializarCamposDepo(); //blanqueamos botones
-                                JOptionPane.showMessageDialog(null, "Registrado exitosamente!!!");
-                                VentanaGimnasio ventana = new VentanaGimnasio(); //Abre la ventana del gym luego de registrar
-                                control.activaVentana(ventana, this);
+                            } else {
+                                Deportista dep = datosDep.buscarDeportista(Integer.parseInt(txtCedula.getText()));
+                                if (dep != null) {
+
+                                    JOptionPane.showMessageDialog(null, "Estudiante ya está registrado ", "Error al Registrar", JOptionPane.ERROR_MESSAGE);
+
+                                } else {
+                                        Deportista depo = new Deportista(Integer.parseInt(txtCedula.getText()), txtNombre.getText(), Integer.parseInt(txtEdad.getText()), (String) comboSexo.getSelectedItem(), Double.parseDouble(txtPeso.getText()), Double.parseDouble(txtAltura.getText()), txtDireccion.getText(), Integer.parseInt(txtFrecuenciaCardiaca.getText()), (String) comboFrecuenciaEntrenamiento.getSelectedItem(), (String) comboTipoEjercicio.getSelectedItem());
+                                        //pantalla y los asociamos al objeto persona
+                                        control.datosDeportista(txtCedula, txtNombre, txtEdad, txtPeso, txtAltura, txtDireccion, txtFrecuenciaCardiaca, comboSexo, comboTipoEjercicio, comboFrecuenciaEntrenamiento); //capturamos los datos indicados desde la 
+                                        resultado = datosDep.agregarDeportista(depo);
+                                    if (resultado == true) {
+                                        InicializarCamposDepo(); //blanqueamos botones
+                                        JOptionPane.showMessageDialog(null, "Registrado exitosamente!!!");
+                                    }
+                                }
                             }
-                             
+
                         }
-                                                                    
+
                     }
-                    
+
                 }
-                
+
             }
-            
+
         }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -347,44 +359,44 @@ public class VentanaDeportista extends javax.swing.JFrame {
     private void btnRegistrarModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarModificacionActionPerformed
         // TODO add your handling code here:
         String tipoUso = "Modificar";
-        
+
         if (txtNombre.getText().isEmpty() || txtCedula.getText().isEmpty() || txtAltura.getText().isEmpty() || txtDireccion.getText().isEmpty() || txtEdad.getText().isEmpty() || txtFrecuenciaCardiaca.getText().isEmpty() || txtPeso.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Es obligatorio llenar todos los campos");
         } else {
-            if(txtCedula.getText().length()<7){
+            if (txtCedula.getText().length() < 7) {
                 JOptionPane.showMessageDialog(null, "La cedula debe tener minimo 7 digitos");
-            }else{
-                if((Integer.parseInt(txtFrecuenciaCardiaca.getText())<50) || (Integer.parseInt(txtFrecuenciaCardiaca.getText())>1000)){
+            } else {
+                if ((Integer.parseInt(txtFrecuenciaCardiaca.getText()) < 50) || (Integer.parseInt(txtFrecuenciaCardiaca.getText()) > 1000)) {
                     JOptionPane.showMessageDialog(null, "La Frecuencia Cardiaca debe ser entre 50 y 1000 LPM");
-                }else{
-                    if((Integer.parseInt(txtEdad.getText())<18) || (Integer.parseInt(txtEdad.getText())>100)){
+                } else {
+                    if ((Integer.parseInt(txtEdad.getText()) < 18) || (Integer.parseInt(txtEdad.getText()) > 100)) {
                         JOptionPane.showMessageDialog(null, "La edad debe ser entre 18 y 100 años");
-                    }else{
-                        if((Integer.parseInt(txtPeso.getText())<45) || (Integer.parseInt(txtPeso.getText())>500)){
+                    } else {
+                        if ((Integer.parseInt(txtPeso.getText()) < 45) || (Integer.parseInt(txtPeso.getText()) > 500)) {
                             JOptionPane.showMessageDialog(null, "El peso debe ser entre 45 y 500 kg");
-                        }else{
-                            if((Double.parseDouble(txtAltura.getText())<1.45) || (Double.parseDouble(txtAltura.getText())>2.70)){
+                        } else {
+                            if ((Double.parseDouble(txtAltura.getText()) < 1.45) || (Double.parseDouble(txtAltura.getText()) > 2.70)) {
                                 JOptionPane.showMessageDialog(null, "La altura debe ser entre 1.45 y 2.70 m");
-                            }else{
-                                control.datosDeportista(txtCedula,txtNombre,txtEdad,txtPeso,txtAltura,txtDireccion,txtFrecuenciaCardiaca,comboSexo,comboTipoEjercicio,comboFrecuenciaEntrenamiento); //capturamos los datos indicados desde la 
+                            } else {
+                                control.datosDeportista(txtCedula, txtNombre, txtEdad, txtPeso, txtAltura, txtDireccion, txtFrecuenciaCardiaca, comboSexo, comboTipoEjercicio, comboFrecuenciaEntrenamiento); //capturamos los datos indicados desde la 
                                 //pantalla y los asociamos al objeto persona
                                 InicializarCamposDepo(); //blanqueamos botones
                                 JOptionPane.showMessageDialog(null, "Cambios registrados exitosamente!!!");
                                 VentanaGimnasio ventana = new VentanaGimnasio(); //Abre la ventana del gym luego de registrar
                                 control.activaVentana(ventana, this);
                             }
-                             
+
                         }
-                                                                    
+
                     }
-                    
+
                 }
-                
+
             }
-            
+
         }
 
-        TablaDeportista tabla = new TablaDeportista(gym, tipoUso);
+        TablaDeportista tabla = new TablaDeportista(tipoUso);
         control.activaVentana(tabla, this);
     }//GEN-LAST:event_btnRegistrarModificacionActionPerformed
 
