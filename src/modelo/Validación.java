@@ -1,4 +1,4 @@
-package clases;
+package modelo;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

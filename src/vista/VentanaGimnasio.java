@@ -5,8 +5,8 @@
  */
 package vista;
 
-import clases.Deportista;
-import clases.Gimnasio;
+import modelo.Deportista;
+import modelo.Gimnasio;
 import controller.Controlador;
 import javax.swing.JToggleButton;
 import persistencia.PersonasXml;
@@ -137,39 +137,39 @@ public class VentanaGimnasio extends javax.swing.JFrame {
 
     private void btnModificarDepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDepoActionPerformed
         // TODO add your handling code here:
-        TablaDeportista tabla = new TablaDeportista(depo,"Modificar");
+        TablaDeportista tabla = new TablaDeportista("Modificar");
         control.activaVentana(tabla,this); 
     }//GEN-LAST:event_btnModificarDepoActionPerformed
 
     private void btnModificarEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEntActionPerformed
         // TODO add your handling code here:
-        TablaEntrenador tabla = new TablaEntrenador(depo,"Modificar");
+        TablaEntrenador tabla = new TablaEntrenador("Modificar");
         control.activaVentana(tabla,this); 
     }//GEN-LAST:event_btnModificarEntActionPerformed
 
     private void btnMostrarDepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarDepoActionPerformed
         // TODO add your handling code here:
         
-        TablaDeportista tabla = new TablaDeportista(depo,"");
+        TablaDeportista tabla = new TablaDeportista("");
         control.activaVentana(tabla,this); 
     }//GEN-LAST:event_btnMostrarDepoActionPerformed
 
     private void btnEliminarDepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDepoActionPerformed
         // TODO add your handling code here:
-        TablaDeportista tabla = new TablaDeportista(depo,"Eliminar");
+        TablaDeportista tabla = new TablaDeportista("Eliminar");
         control.activaVentana(tabla,this); 
    
     }//GEN-LAST:event_btnEliminarDepoActionPerformed
 
     private void btnEliminarEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEntActionPerformed
         // TODO add your handling code here:
-        TablaEntrenador tabla = new TablaEntrenador(depo,"Eliminar");
+        TablaEntrenador tabla = new TablaEntrenador("Eliminar");
         control.activaVentana(tabla,this); 
     }//GEN-LAST:event_btnEliminarEntActionPerformed
 
     private void btnMostrarEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarEntActionPerformed
         // TODO add your handling code here:
-        TablaEntrenador tabla = new TablaEntrenador(depo,"");
+        TablaEntrenador tabla = new TablaEntrenador("");
         control.activaVentana(tabla,this); 
     }//GEN-LAST:event_btnMostrarEntActionPerformed
 

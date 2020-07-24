@@ -5,8 +5,8 @@
  */
 package vista;
 
-import clases.Deportista;
-import clases.Gimnasio;
+import modelo.Deportista;
+import modelo.Gimnasio;
 import controller.Controlador;
 import static controller.Controlador.gym;
 import java.awt.event.MouseAdapter;
@@ -49,31 +49,7 @@ public class TablaDeportista extends javax.swing.JFrame {
         this.setResizable(false);
     }
 
-    public TablaDeportista(PersonasXml depo ,  String tipoBoton) {
-
-        initComponents();
-        control = new Controlador(this);
-        control.llenarTablaDepo(tablaDeportista);
-
-        if (tipoBoton.equals("Eliminar")) {
-
-            btnEliminarDeportista.setVisible(true);
-            btnModificarDeportista.setVisible(false);
-
-        } else if (tipoBoton.equals("Modificar")) {
-
-            btnEliminarDeportista.setVisible(false);
-            btnModificarDeportista.setVisible(true);
-
-        } else if (tipoBoton.equals("")) {
-
-            btnEliminarDeportista.setVisible(false);
-            btnModificarDeportista.setVisible(false);
-        }
-
-    }
-    
-        public TablaDeportista(String tipoBoton) {
+    public TablaDeportista(String tipoBoton) {
 
         initComponents();
         control = new Controlador(this);
@@ -106,18 +82,48 @@ public class TablaDeportista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaDeportista = new javax.swing.JTable();
         btnAtras = new javax.swing.JButton();
         btnEliminarDeportista = new javax.swing.JToggleButton();
         btnModificarDeportista = new javax.swing.JToggleButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaDeportista = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnAtras.setText("Atrás");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 200, -1, -1));
+
+        btnEliminarDeportista.setText("Eliminar Deportista");
+        btnEliminarDeportista.setPreferredSize(new java.awt.Dimension(145, 32));
+        btnEliminarDeportista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarDeportistaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEliminarDeportista, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 150, -1));
+
+        btnModificarDeportista.setText("Modificar Deportista");
+        btnModificarDeportista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarDeportistaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnModificarDeportista, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+
         tablaDeportista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -150,32 +156,7 @@ public class TablaDeportista extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaDeportista);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 180));
-
-        btnAtras.setText("Atrás");
-        btnAtras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtrasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 200, -1, -1));
-
-        btnEliminarDeportista.setText("Eliminar Deportista");
-        btnEliminarDeportista.setPreferredSize(new java.awt.Dimension(145, 32));
-        btnEliminarDeportista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarDeportistaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnEliminarDeportista, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 150, -1));
-
-        btnModificarDeportista.setText("Modificar Deportista");
-        btnModificarDeportista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarDeportistaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnModificarDeportista, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 200));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -184,14 +165,17 @@ public class TablaDeportista extends javax.swing.JFrame {
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
         VentanaGimnasio ventana = new VentanaGimnasio();
+        this.dispose();
         control.activaVentana(ventana, this);
+
+
     }//GEN-LAST:event_btnAtrasActionPerformed
     //Botón para eliminar un deportista
     private void btnEliminarDeportistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDeportistaActionPerformed
         // TODO add your handling code here: 
         int i = tablaDeportista.getSelectedRow();
         if (i >= 0) {
-            control.eliminarElemento(this.nombreDepo);
+
             nombreDepo = (tablaDeportista.getValueAt(i, 0).toString());
             cedulaDepo = (tablaDeportista.getValueAt(i, 1).toString());
             edadDepo = (tablaDeportista.getValueAt(i, 2).toString());
@@ -202,14 +186,15 @@ public class TablaDeportista extends javax.swing.JFrame {
             ritmoCardiaco = (tablaDeportista.getValueAt(i, 7).toString());
             frecuenciaEntrenamiento = (tablaDeportista.getValueAt(i, 8).toString());
             tipoEjercicio = (tablaDeportista.getValueAt(i, 9).toString());
-            
+
             int confirmacion = JOptionPane.showOptionDialog(null, "¿Desea Realizar La Operación?", "::::...Confirmación...:::",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
             if (confirmacion == 0) {
-                
+                VentanaGimnasio ventana = new VentanaGimnasio();
                 depo.borrarDeportista(Integer.parseInt(cedulaDepo));
-                control.eliminarElemento(this.nombreDepo);
-                control.llenarTablaDepo(tablaDeportista);
+                JOptionPane.showMessageDialog(this, "! Proceso realizado con éxito ¡");
+                control.activaVentana(ventana, this);
+                
             }
 
         } else {
@@ -232,10 +217,17 @@ public class TablaDeportista extends javax.swing.JFrame {
             ritmoCardiaco = (tablaDeportista.getValueAt(i, 7).toString());
             frecuenciaEntrenamiento = (tablaDeportista.getValueAt(i, 8).toString());
             tipoEjercicio = (tablaDeportista.getValueAt(i, 9).toString());
-            control.activaTabla(this);
-            control.modificarElemento(this.nombreDepo);
-            depo.borrarDeportista(Integer.parseInt(cedulaDepo));
-  
+
+            int confirmacion = JOptionPane.showOptionDialog(null, "¿Desea Realizar La Operación?", "::::...Confirmación...:::",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if (confirmacion == 0) {
+                Deportista deportista = depo.buscarDeportista(Integer.parseInt(this.cedulaDepo));
+                if (deportista != null) {
+                    control.traerDatosDeportista(deportista);
+                    control.activaTabla(this);
+                    
+                }
+            }
 
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione una opción para proceder");

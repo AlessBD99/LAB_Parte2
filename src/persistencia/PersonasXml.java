@@ -5,9 +5,9 @@
  */
 package persistencia;
 
-import clases.Deportista;
-import clases.Entrenador;
-import clases.Gimnasio;
+import modelo.Deportista;
+import modelo.Entrenador;
+import modelo.Gimnasio;
 import static controller.Controlador.gym;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -107,9 +107,6 @@ public class PersonasXml {
         Element direccion = new Element("direccion");
         Element peso = new Element("peso");
         Element altura = new Element("altura");
-        Element ritmoCardiaco = new Element("frecuenciaCardiaca");
-        Element frecuenciaEntrenamiento = new Element("frecuenciaEntrenamiento");
-        Element tipoEjercicio = new Element("ejercicio");
         Element especialidad = new Element("especialidad");
         Element experiencia = new Element("experienciaLaboral");
 
@@ -139,7 +136,7 @@ public class PersonasXml {
     private Deportista DeportistaToObject(Element element) throws ParseException {
         /*Método que retorna un Deportista. A este metodo se le manda un Element y con
     sus datos se hará los pasos requeridos para crear el objeto deportista*/
-        Deportista depo = new Deportista(Integer.parseInt(element.getChildText("cedula")), element.getChildText("nombreyapellido"), Integer.parseInt(element.getChildText("edad")), element.getChildText("sexo"), Double.parseDouble(element.getChildText("peso")), Double.parseDouble(element.getChildText("altura")), element.getChildText("direccion"), Integer.parseInt(element.getChildText("frecuenciaCardiaca")), element.getChildText("frecuenciaEntrenamiento"), element.getChildText("tipoEjercicio"));
+        Deportista depo = new Deportista(Integer.parseInt(element.getChildText("cedula")), element.getChildText("nombreyapellido"), Integer.parseInt(element.getChildText("edad")), element.getChildText("sexo"), Double.parseDouble(element.getChildText("peso")), Double.parseDouble(element.getChildText("altura")), element.getChildText("direccion"), Integer.parseInt(element.getChildText("frecuenciaCardiaca")), element.getChildText("frecuenciaEntrenamiento"), element.getChildText("ejercicio"));
         return depo;
     }
 
@@ -228,7 +225,7 @@ public class PersonasXml {
 
     public Deportista buscarDeportista(Integer cedula) {
         /* @param cedula número de cedula del Deportista a buscar
-    * @return objeto Estudiante con sus datos segun busqueda*/
+    * @return objeto Deportista con sus datos segun busqueda*/
         Element aux = new Element("Deportista");
         List Deportista = this.root.getChildren("Deportista");
         while (aux != null) {
@@ -263,7 +260,7 @@ public class PersonasXml {
     }
 
     public void actualizarDeportista(Deportista depo) {
-        /* @param Estudiante objeto Deportista a actualizar
+        /* @param Deportista objeto Deportista a actualizar
      * @return valor booleano con la condición de éxito */
         boolean resultado = false;
         Element aux = new Element("Deportista");
@@ -279,7 +276,7 @@ public class PersonasXml {
     }
 
     public boolean actualizarEntrenador(Entrenador ent) {
-        /* @param Estudiante objeto Entrenador a actualizar
+        /* @param Entrenador objeto Entrenador a actualizar
      * @return valor booleano con la condición de éxito */
         boolean resultado = false;
         Element aux = new Element("Entrenador");
@@ -294,23 +291,30 @@ public class PersonasXml {
         agregarEntrenador(ent);
         return resultado;
     }
-    
-    // AYUDA AQUÍ , el objetivo de este metodo es devolver un objeto , este metodo es llamado (en el ejemplo de la profesor) en la linea 36 ,
-    // en la clase VentanaListaEstudiantes 
-    
-//    public ArrayList<Deportista> Deportistas() {
-//        /* Para obtener todas los deportistas registradas
-//     * @return ArrayList con todos los objetos Deportistas  */
-//        ArrayList<Deportista> resultado = new ArrayList<Deportista>();
-//        
-//        for (Object it : root.getChildren()) {
-//            Element xmlElem = (Element) it;
-//            try {
-//                resultado.add(DeportistaToObject(xmlElem));
-//            } catch (ParseException ex) {
-//                System.out.println(ex.getMessage());
-//            }
-//        }
-//        return resultado;
-//    }
+
+    public ArrayList<Deportista> todosLosDeportistas() {
+        ArrayList<Deportista> resultado = new ArrayList<>();
+        for (Object it : root.getChildren("Deportista")) {
+            Element xmlElem = (Element) it;
+            try {
+                resultado.add(DeportistaToObject(xmlElem));
+            } catch (ParseException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return resultado;
+    }
+
+    public ArrayList<Entrenador> todosLosEntrenadores() {
+        ArrayList<Entrenador> resultado = new ArrayList<>();
+        for (Object it : root.getChildren("Entrenador")) {
+            Element xmlElem = (Element) it;
+            try {
+                resultado.add(EntrenadorToObject(xmlElem));
+            } catch (ParseException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return resultado;
+    }
 }

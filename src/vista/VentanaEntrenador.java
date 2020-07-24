@@ -5,12 +5,13 @@
  */
 package vista;
 
-import clases.Deportista;
-import clases.Entrenador;
-import clases.Gimnasio;
+import modelo.Deportista;
+import modelo.Entrenador;
+import modelo.Gimnasio;
 import com.placeholder.PlaceHolder;
 import controller.Controlador;
 import javax.swing.JOptionPane;
+import persistencia.PersonasXml;
 
 /**
  *
@@ -22,6 +23,8 @@ public class VentanaEntrenador extends javax.swing.JFrame {
     Gimnasio gym = new Gimnasio();
     PlaceHolder holder;
     Entrenador ent = new Entrenador();
+    private boolean resultado = false;
+    PersonasXml datosEnt = new PersonasXml();
 
     /**
      * Creates new form VentanaEntrenador
@@ -34,6 +37,7 @@ public class VentanaEntrenador extends javax.swing.JFrame {
         this.setResizable(false);
         holder = new PlaceHolder(txtCedula, " [min:7 digitos - max:9 digitos] ");
         holder = new PlaceHolder(txtEdad, " [min:18 años - max:100 años] ");
+        holder = new PlaceHolder(txtConfirmar, " Confirme su Cédula ");
         holder = new PlaceHolder(txtPeso, " [min:45 Kg - max:500 Kg] ");
         holder = new PlaceHolder(txtAltura, " [min:1.45 m - max:2.7 m] ");
         holder = new PlaceHolder(txtNombre, " Ej: Antonio Perez Gonzalez");
@@ -50,12 +54,14 @@ public class VentanaEntrenador extends javax.swing.JFrame {
         this.txtDireccion.setText("");
         this.txtEspecialidad.setText("");
         this.txtExperiencia.setText("");
+        this.txtConfirmar.setText("");
 
     }
 
     public void modificacionEnte(Entrenador dep) {
         String numDouble;
-
+        txtCedula.enable(false);
+        txtConfirmar.enable(false);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -106,6 +112,7 @@ public class VentanaEntrenador extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtEspecialidad = new javax.swing.JTextField();
         btnGuardarCambios = new javax.swing.JButton();
+        txtConfirmar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -156,7 +163,7 @@ public class VentanaEntrenador extends javax.swing.JFrame {
                 txtCedulaKeyTyped(evt);
             }
         });
-        jPanel1.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 390, -1));
+        jPanel1.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 180, -1));
 
         txtEdad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -165,7 +172,7 @@ public class VentanaEntrenador extends javax.swing.JFrame {
         });
         jPanel1.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 180, -1));
 
-        comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maculino", "Femenino" }));
+        comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
         jPanel1.add(comboSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 180, -1));
 
         txtPeso.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -244,11 +251,12 @@ public class VentanaEntrenador extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnGuardarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
+        jPanel1.add(txtConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 190, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/IconoEntrenador.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 70, 70));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo4.jpeg"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo3.jpg"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 540));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 540));
@@ -285,12 +293,21 @@ public class VentanaEntrenador extends javax.swing.JFrame {
                             if ((Double.parseDouble(txtAltura.getText()) < 1.45) || (Double.parseDouble(txtAltura.getText()) > 2.70)) {
                                 JOptionPane.showMessageDialog(null, "La altura debe ser entre 1.45 y 2.70 m");
                             } else {
-                                control.datosEntrenador(this.txtCedula, this.txtNombre, this.txtEdad, this.txtPeso, this.txtAltura, this.txtDireccion, this.txtEspecialidad, this.comboSexo, this.txtExperiencia); //capturamos los datos indicados desde la 
-                                //pantalla y los asociamos al objeto persona
-                                InicializarCamposEnte(); //blanqueamos botones
-                                JOptionPane.showMessageDialog(null, "Registrado exitosamente!!!");
-                                VentanaGimnasio ventana = new VentanaGimnasio(); //Abre la ventana del gym luego de registrar
-                                control.activaVentana(ventana, this);
+                                if (txtCedula.getText().equals(txtConfirmar.getText())) {
+                                    Entrenador entrenador = new Entrenador(Integer.parseInt(txtCedula.getText()), txtNombre.getText(), Integer.parseInt(txtEdad.getText()), (String) comboSexo.getSelectedItem(), Double.parseDouble(txtPeso.getText()), Double.parseDouble(txtAltura.getText()), txtDireccion.getText(), Integer.parseInt(txtExperiencia.getText()), txtEspecialidad.getText());
+                                    control.datosEntrenador(this.txtCedula, this.txtNombre, this.txtEdad, this.txtPeso, this.txtAltura, this.txtDireccion, this.txtEspecialidad, this.comboSexo, this.txtExperiencia); //capturamos los datos indicados desde la 
+                                    //pantalla y los asociamos al objeto persona
+                                    resultado = datosEnt.agregarEntrenador(entrenador);
+                                    if (resultado == true) {
+                                        InicializarCamposEnte(); //blanqueamos botones
+                                        JOptionPane.showMessageDialog(null, "Registrado exitosamente!!!");
+
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Error con el campo Cédula", "ERROR", JOptionPane.WARNING_MESSAGE);
+
+                                }
+
                             }
 
                         }
@@ -300,7 +317,6 @@ public class VentanaEntrenador extends javax.swing.JFrame {
                 }
 
             }
-
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -321,18 +337,18 @@ public class VentanaEntrenador extends javax.swing.JFrame {
                     if ((Integer.parseInt(txtExperiencia.getText()) < 0) || (Integer.parseInt(txtExperiencia.getText()) > Integer.parseInt(txtEdad.getText()))) {
                         JOptionPane.showMessageDialog(null, "La Experiencia laborar debe ser entre 0 y 99 años, ademas de ser menor que su edad");
                     } else {
-                        if ((Integer.parseInt(txtPeso.getText()) < 45) || (Integer.parseInt(txtPeso.getText()) > 500)) {
+                        if ((Double.parseDouble(txtPeso.getText()) < 45) || (Double.parseDouble(txtPeso.getText()) > 500)) {
                             JOptionPane.showMessageDialog(null, "El peso debe ser entre 45 y 500 kg");
                         } else {
                             if ((Double.parseDouble(txtAltura.getText()) < 1.45) || (Double.parseDouble(txtAltura.getText()) > 2.70)) {
                                 JOptionPane.showMessageDialog(null, "La altura debe ser entre 1.45 y 2.70 m");
                             } else {
-                                control.datosEntrenador(this.txtCedula, this.txtNombre, this.txtEdad, this.txtPeso, this.txtAltura, this.txtDireccion, this.txtEspecialidad, this.comboSexo, this.txtExperiencia); //capturamos los datos indicados desde la 
+
+                                control.datosEntrenadorMod(ent, this.txtCedula, this.txtNombre, this.txtEdad, this.txtPeso, this.txtAltura, this.txtDireccion, this.txtEspecialidad, this.comboSexo, this.txtExperiencia); //capturamos los datos indicados desde la 
                                 //pantalla y los asociamos al objeto persona
                                 InicializarCamposEnte(); //blanqueamos botones
-                                JOptionPane.showMessageDialog(null, "Cambios Registrados exitosamente!!!");
-                                VentanaGimnasio ventana = new VentanaGimnasio(); //Abre la ventana del gym luego de registrar
-                                control.activaVentana(ventana, this);
+                                JOptionPane.showMessageDialog(null, "Cambios registrados exitosamente!!!");
+
                             }
 
                         }
@@ -483,6 +499,7 @@ public class VentanaEntrenador extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtAltura;
     private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtConfirmar;
     private javax.swing.JTextArea txtDireccion;
     private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtEspecialidad;

@@ -1,5 +1,5 @@
 //PAREJA: ALESSANDRO BERARDI Y YAMIL GULO
-package clases;
+package modelo;
 
 import java.util.Scanner;
 

@@ -1,13 +1,59 @@
 <personas>
+  <Entrenador>
+    <nombreyapellido>Miguel Bose</nombreyapellido>
+    <cedula>25814736</cedula>
+    <edad>70</edad>
+    <sexo>Masculino</sexo>
+    <direccion>Petare</direccion>
+    <peso>125.0</peso>
+    <altura>1.68</altura>
+    <especialidad>Artes Marciales</especialidad>
+    <experienciaLaboral>20</experienciaLaboral>
+  </Entrenador>
+  <Entrenador>
+    <nombreyapellido>Ricardo Arjona</nombreyapellido>
+    <cedula>12345678</cedula>
+    <edad>47</edad>
+    <sexo>Masculino</sexo>
+    <direccion>El valle</direccion>
+    <peso>85.0</peso>
+    <altura>1.74</altura>
+    <especialidad>Instructor de Natacion</especialidad>
+    <experienciaLaboral>35</experienciaLaboral>
+  </Entrenador>
   <Deportista>
-    <nombreyapellido>alessandro Berardi</nombreyapellido>
-    <cedula>27200673</cedula>
+    <nombreyapellido>Antonio Jose</nombreyapellido>
+    <cedula>45678912</cedula>
+    <edad>30</edad>
+    <sexo>Masculino</sexo>
+    <direccion>San Agustin</direccion>
+    <peso>100.0</peso>
+    <altura>1.9</altura>
+    <frecuenciaCardiaca>120</frecuenciaCardiaca>
+    <frecuenciaEntrenamiento>Semanal</frecuenciaEntrenamiento>
+    <ejercicio>flexibilidad y equilibrio</ejercicio>
+  </Deportista>
+  <Deportista>
+    <nombreyapellido>Alessandro</nombreyapellido>
+    <cedula>12345678</cedula>
     <edad>21</edad>
     <sexo>Masculino</sexo>
-    <direccion>Montalban</direccion>
-    <peso>100.0</peso>
-    <altura>1.89</altura>
-    <frecuenciaCardiaca>100</frecuenciaCardiaca>
+    <direccion>Paraiso</direccion>
+    <peso>90.0</peso>
+    <altura>1.9</altura>
+    <frecuenciaCardiaca>120</frecuenciaCardiaca>
+    <frecuenciaEntrenamiento>Diario</frecuenciaEntrenamiento>
+    <ejercicio>cardio</ejercicio>
+  </Deportista>
+  <Deportista>
+    <nombreyapellido>Felix Rivas</nombreyapellido>
+    <cedula>14785214</cedula>
+    <edad>18</edad>
+    <sexo>Masculino</sexo>
+    <direccion>La vega</direccion>
+    <peso>45.0</peso>
+    <altura>1.69</altura>
+    <frecuenciaCardiaca>89</frecuenciaCardiaca>
     <frecuenciaEntrenamiento>Diario</frecuenciaEntrenamiento>
     <ejercicio>tonificacion</ejercicio>
   </Deportista>

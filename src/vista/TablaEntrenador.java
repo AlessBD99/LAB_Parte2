@@ -5,7 +5,8 @@
  */
 package vista;
 
-import clases.Gimnasio;
+import modelo.Entrenador;
+import modelo.Gimnasio;
 import controller.Controlador;
 import javax.swing.JOptionPane;
 import persistencia.PersonasXml;
@@ -18,6 +19,7 @@ public class TablaEntrenador extends javax.swing.JFrame {
 
     //Variables
     Controlador control;
+    PersonasXml ent = new PersonasXml();
     private String cedulaEnt = "";
     private String nombreEnt = "";
     private String edadEnt = "";
@@ -39,11 +41,10 @@ public class TablaEntrenador extends javax.swing.JFrame {
         this.setResizable(false);
     }
 
-    public TablaEntrenador(PersonasXml ent , String tipoBoton) {
+    public TablaEntrenador(String tipoBoton) {
         initComponents();
         control = new Controlador(this);
         control.llenarTablaEnt(tablaEntrenador);
-
         if (tipoBoton.equals("Eliminar")) {
 
             btnEliminarEnt.setVisible(true);
@@ -61,30 +62,6 @@ public class TablaEntrenador extends javax.swing.JFrame {
         }
 
     }
-    
-        public TablaEntrenador(String tipoBoton) {
-        initComponents();
-        control = new Controlador(this);
-        control.llenarTablaEnt(tablaEntrenador);
-
-        if (tipoBoton.equals("Eliminar")) {
-
-            btnEliminarEnt.setVisible(true);
-            btnModificarEnt.setVisible(false);
-
-        } else if (tipoBoton.equals("Modificar")) {
-
-            btnEliminarEnt.setVisible(false);
-            btnModificarEnt.setVisible(true);
-
-        } else if (tipoBoton.equals("")) {
-
-            btnEliminarEnt.setVisible(false);
-            btnModificarEnt.setVisible(false);
-        }
-
-    }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,10 +79,14 @@ public class TablaEntrenador extends javax.swing.JFrame {
         btnModificarEnt = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaEntrenador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -139,7 +120,7 @@ public class TablaEntrenador extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaEntrenador);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 200));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 220));
 
         btnAtras.setText("Atrás");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +148,7 @@ public class TablaEntrenador extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   
+
     //Botón para ir a la ventana anterior
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
@@ -189,8 +170,16 @@ public class TablaEntrenador extends javax.swing.JFrame {
             alturaEnt = (tablaEntrenador.getValueAt(i, 6).toString());
             experienciaEnt = (tablaEntrenador.getValueAt(i, 6).toString());
             especialidadEnt = (tablaEntrenador.getValueAt(i, 6).toString());
-            control.eliminarElementoEntrenador(this.nombreEnt);
-            control.llenarTablaEnt(tablaEntrenador);
+
+            int confirmacion = JOptionPane.showOptionDialog(null, "¿Desea Realizar La Operación?", "::::...Confirmación...:::",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            if (confirmacion == 0) {
+                VentanaGimnasio ventana = new VentanaGimnasio();
+                ent.borrarEntrenador(Integer.parseInt(cedulaEnt));
+                JOptionPane.showMessageDialog(this, "! Proceso realizado con éxito ¡");
+                control.activaVentana(ventana, this);
+            }
         } else {
 
             JOptionPane.showMessageDialog(this, "Seleccione una opción para proceder");
@@ -212,9 +201,15 @@ public class TablaEntrenador extends javax.swing.JFrame {
             alturaEnt = (tablaEntrenador.getValueAt(i, 6).toString());
             experienciaEnt = (tablaEntrenador.getValueAt(i, 6).toString());
             especialidadEnt = (tablaEntrenador.getValueAt(i, 6).toString());
-            control.activaTabla(this);
-            control.modificarElementoEntrenador(this.nombreEnt);
-
+            int confirmacion = JOptionPane.showOptionDialog(null, "¿Desea Realizar La Operación?", "::::...Confirmación...:::",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if (confirmacion == 0) {
+                Entrenador entrenador = ent.buscarEntrenador(Integer.parseInt(this.cedulaEnt));
+                if (entrenador != null) {
+                    control.traerDatosEntrenador(entrenador);
+                    control.activaTabla(this);
+                }
+            }
         } else {
 
             JOptionPane.showMessageDialog(this, "Seleccione una opción para proceder");
